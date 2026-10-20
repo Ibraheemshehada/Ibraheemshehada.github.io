@@ -7,7 +7,7 @@
 <meta name="description" content="Ibrahim Khalil Shehada — computer engineer, university lecturer and machine learning researcher building trustworthy AI for healthcare.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Kufi+Arabic:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Kufi+Arabic:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Ibrahim Khalil Shehada · ML Researcher &amp; Lecturer">
 <meta property="og:description" content="Computer engineer, university lecturer and machine learning researcher building trustworthy AI for healthcare. Technical lead of DiaFootCare.">
@@ -94,6 +94,28 @@ p{margin:0}
 :root[data-theme="dark"] .theme-btn .moon{display:block}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme-btn .sun{display:none}:root:not([data-theme="light"]) .theme-btn .moon{display:block}}
 
+.lang{position:relative}
+.lang-btn{all:unset;cursor:pointer;height:36px;padding:0 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:var(--f-mono);font-size:.78rem;transition:border-color .2s}
+.lang-btn:hover{border-color:var(--sea)}
+.lang-btn:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.lang-btn svg{width:16px;height:16px}
+.lang-menu{position:absolute;inset-inline-end:0;top:calc(100% + 8px);min-width:190px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px;display:grid;gap:2px;box-shadow:0 18px 40px -18px color-mix(in srgb,var(--ink) 45%,transparent);z-index:70;animation:fadeup .2s ease-out}
+.lang-menu button{all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 12px;border-radius:9px;font-size:.92rem;color:var(--ink)}
+.lang-menu button small{font-family:var(--f-mono);font-size:.68rem;color:var(--ink-2)}
+.lang-menu button:hover,.lang-menu button:focus-visible{background:var(--sea-soft)}
+.lang-menu button[aria-checked="true"]{font-weight:600;color:var(--sea)}
+.tr-note{font-size:.85rem;font-style:italic}
+canvas{direction:ltr}
+/* right-to-left (Arabic) */
+:root[dir="rtl"] body{font-family:"IBM Plex Sans Arabic",var(--f-body)}
+:root[dir="rtl"] h1,:root[dir="rtl"] h2,:root[dir="rtl"] h3,:root[dir="rtl"] .about .lede,:root[dir="rtl"] .contact h2{font-family:"Noto Kufi Arabic",var(--f-display);letter-spacing:0;line-height:1.4}
+:root[dir="rtl"] .name{font-size:clamp(2.3rem,6vw,4.4rem);line-height:1.3}
+:root[dir="rtl"] .hello .ar{display:none}
+:root[dir="rtl"] .btn.solid svg{transform:scaleX(-1)}
+:root[dir="rtl"] .tag.a{font-family:"IBM Plex Sans Arabic",var(--f-mono)}
+:root[dir="rtl"] .label{letter-spacing:0;font-family:"IBM Plex Sans Arabic",var(--f-mono);font-size:.82rem}
+:root[dir="rtl"] .ledger,:root[dir="rtl"] .grid,:root[dir="rtl"] .pubs,:root[dir="rtl"] .wip,:root[dir="rtl"] .matrix,:root[dir="rtl"] .courses,:root[dir="rtl"] .interests,:root[dir="rtl"] .teach ul,:root[dir="rtl"] .feature .chips,:root[dir="rtl"] .feature p:not([data-i18n]),:root[dir="rtl"] .typed,:root[dir="rtl"] .way .v{direction:ltr;text-align:left}
+
 /* ---------- hero ---------- */
 .hero{padding-block:clamp(40px,7vw,88px) 40px}
 .hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
@@ -123,11 +145,11 @@ p{margin:0}
 .btn svg{width:16px;height:16px}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:1px solid var(--line)}
-.stat{padding:16px 14px 0 0}
-.stat+.stat{padding-left:14px;border-left:1px solid var(--line)}
+.stat{padding-block-start:16px;padding-inline-end:14px}
+.stat+.stat{padding-inline-start:14px;border-inline-start:1px solid var(--line)}
 .stat .n{font-family:var(--f-display);font-weight:800;font-size:var(--step-3);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .stat .t{font-size:.8rem;color:var(--ink-2);line-height:1.35}
-@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0;padding-left:0}}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-inline-start:0;padding-inline-start:0}}
 
 /* portrait framed as a detection */
 .portrait{position:relative;justify-self:center;width:min(100%,400px)}
@@ -191,7 +213,7 @@ section{padding-block:clamp(56px,8vw,104px)}
 .row .when{font-family:var(--f-mono);font-size:.82rem;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:4px}
 .row h3{font-size:var(--step-1);font-weight:600;letter-spacing:-.01em}
 .row .org{color:var(--sea);font-weight:500;margin-top:2px}
-.row ul{margin:10px 0 0;padding-left:18px;color:var(--ink-2);max-width:70ch}
+.row ul{margin:10px 0 0;padding-inline-start:18px;color:var(--ink-2);max-width:70ch}
 .row li+li{margin-top:4px}
 .row::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:var(--sea);transition:width .8s cubic-bezier(.2,.8,.2,1)}
 .row:hover::before{width:100%}
@@ -290,7 +312,7 @@ section{padding-block:clamp(56px,8vw,104px)}
 .box{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--panel)}
 .box h3{font-size:1.05rem;font-family:var(--f-body);font-weight:600;margin-bottom:10px}
 .box p,.box li{color:var(--ink-2);font-size:.95rem}
-.box ul{margin:0;padding-left:18px;display:grid;gap:8px}
+.box ul{margin:0;padding-inline-start:18px;display:grid;gap:8px}
 
 /* contact */
 .contact{background:var(--deep);color:var(--on-deep);border-radius:28px;padding:clamp(28px,6vw,64px);position:relative;overflow:hidden}
@@ -327,13 +349,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <a class="mark" href="#top"><i>IKS</i><span>Ibrahim Shehada</span></a>
     <div class="top-r">
     <nav class="nav" aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#work">Work</a>
-      <a href="#research">Research</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact" class="keep">Contact</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#experience" data-i18n="nav.experience">Experience</a>
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#research" data-i18n="nav.research">Research</a>
+      <a href="#skills" data-i18n="nav.skills">Skills</a>
+      <a href="#contact" class="keep" data-i18n="nav.contact">Contact</a>
     </nav>
+    <div class="lang">
+      <button type="button" class="lang-btn" id="langBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenu" aria-label="Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg>
+        <span id="langCode">EN</span>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu" aria-label="Choose language" hidden></div>
+    </div>
     <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch to dark mode" title="Switch theme">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6z"/></svg>
@@ -349,22 +378,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="wrap">
     <div>
       <div class="hello">
-        <span class="status"><b></b>Open to PhD &amp; research positions</span>
+        <span class="status"><b></b><span data-i18n="hero.status">Open to PhD &amp; research positions</span></span>
         <span class="ar" lang="ar" dir="rtl">إبراهيم خليل شحادة</span>
       </div>
-      <h1 class="name"><span class="ln"><span>Ibrahim Khalil</span></span><span class="ln"><span>Shehada</span></span></h1>
-      <p class="role"><strong>Computer engineer, university lecturer and ML researcher</strong> building computer-vision tools that clinicians can trust.</p>
+      <h1 class="name"><span class="ln"><span data-i18n="name1">Ibrahim Khalil</span></span><span class="ln"><span data-i18n="name2">Shehada</span></span></h1>
+      <p class="role" data-i18n="hero.role"><strong>Computer engineer, university lecturer and ML researcher</strong> building computer-vision tools that clinicians can trust.</p>
       <p class="typed" aria-live="off"><span class="k">&gt;</span> <span id="typed">model.fit(evidence, not_just_code)</span><span class="caret"></span></p>
       <div class="cta">
-        <a class="btn solid" href="#contact">Get in touch
+        <a class="btn solid" href="#contact"><span data-i18n="cta.contact">Get in touch</span>
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-        <a class="btn ghost" href="#work">See my work</a>
+        <a class="btn ghost" href="#work" data-i18n="cta.work">See my work</a>
+        <a class="btn ghost" href="https://ibraheemshehada.github.io/Ibrahim_Shehada_CV.pdf" target="_blank" rel="noopener" download><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2v8M4.5 6.8 8 10.3l3.5-3.5M3 13.5h10"/></svg><span data-i18n="cta.cv">Download CV</span></a>
       </div>
       <div class="stats">
-        <div class="stat"><div class="n" data-to="5000" data-suffix="+">5000+</div><div class="t">students taught</div></div>
-        <div class="stat"><div class="n" data-to="10">10</div><div class="t">academic semesters</div></div>
-        <div class="stat"><div class="n" data-to="6">6</div><div class="t">production apps shipped</div></div>
-        <div class="stat"><div class="n" data-to="5">5</div><div class="t">papers published or in progress</div></div>
+        <div class="stat"><div class="n" data-to="5000" data-suffix="+">5000+</div><div class="t" data-i18n="stat.students">students taught</div></div>
+        <div class="stat"><div class="n" data-to="10">10</div><div class="t" data-i18n="stat.semesters">academic semesters</div></div>
+        <div class="stat"><div class="n" data-to="6">6</div><div class="t" data-i18n="stat.apps">production apps shipped</div></div>
+        <div class="stat"><div class="n" data-to="2">2</div><div class="t" data-i18n="stat.papers">publications · 3 in preparation</div></div>
       </div>
     </div>
     <div class="portrait">
@@ -373,7 +403,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="scan"></div>
         <div class="bbox"><i></i><span>person · lecturer · 0.99</span></div>
       </div>
-      <div class="tag a">📍 Gaza, Palestine</div>
+      <div class="tag a" data-i18n="loc">Gaza, Palestine</div>
       <div class="tag b"><em>Python</em> · <em>PyTorch</em> · <em>Flutter</em></div>
     </div>
   </div>
@@ -382,12 +412,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- ================= ABOUT ================= -->
 <section id="about" class="rule">
   <div class="wrap about">
-    <div class="label">About</div>
+    <div class="label" data-i18n="about.label">About</div>
     <div>
-      <p class="lede rv">I build systems that read medical images carefully, and I want to know <mark>exactly when they should not be trusted.</mark></p>
+      <p class="lede rv" data-i18n="about.lede">I build systems that read medical images carefully, and I want to know <mark>exactly when they should not be trusted.</mark></p>
       <div class="cols rv">
-        <p>I'm a Computer Engineer (Islamic University of Gaza, 2020) and have spent more than four years as a lecturer at Al-Aqsa University's Faculty of IT, teaching Machine Learning, Data Science, Pattern Recognition and Mobile Programming. Across university courses and training programmes I have taught more than 5,000 students.</p>
-        <p>Alongside teaching I ship software. Since 2021 I've delivered six production applications in healthcare, education and digital payments, including <strong>DiaFootCare</strong>, an AI wound-monitoring app that is now the intervention in a registered clinical trial. I'm completing an M.Sc. in Information Technology at the Islamic University of Gaza and preparing for doctoral research in medical computer vision.</p>
+        <p data-i18n="about.p1">I'm a Computer Engineer (Islamic University of Gaza, 2020) and have spent more than four years as a lecturer at Al-Aqsa University's Faculty of IT, teaching Machine Learning, Data Science, Pattern Recognition and Mobile Programming. Across university courses and training programmes I have taught more than 5,000 students.</p>
+        <p data-i18n="about.p2">Alongside teaching I ship software. Since 2021 I've delivered six production applications in healthcare, education and digital payments, including <strong>DiaFootCare</strong>, an AI wound-monitoring app that is now the intervention in a registered clinical trial. I'm completing an M.Sc. in Information Technology at the Islamic University of Gaza and preparing for doctoral research in medical computer vision.</p>
       </div>
     </div>
   </div>
@@ -397,10 +427,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="lab" class="rule" style="padding-top:clamp(40px,6vw,72px)">
   <div class="wrap">
     <div class="head">
-      <div class="label">From my research</div>
+      <div class="label" data-i18n="lab.label">From my research</div>
       <div>
-        <h2>Four optimizers, one valley.</h2>
-        <p>My first paper benchmarked seven deep-learning optimizers. Its lesson: no optimizer wins everywhere. Below, four of them race down the same loss surface live. Click or tap anywhere on the surface to drop a new starting point.</p>
+        <h2 data-i18n="lab.h2">Four optimizers, one valley.</h2>
+        <p data-i18n="lab.p">My first paper benchmarked seven deep-learning optimizers. Its lesson: no optimizer wins everywhere. Below, four of them race down the same loss surface live. Click or tap anywhere on the surface to drop a new starting point.</p>
       </div>
     </div>
     <div class="lab rv">
@@ -411,7 +441,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="lab-body">
         <canvas id="field" aria-label="Animated contour map showing SGD, Momentum, Adam and Lion optimizers descending a loss surface"></canvas>
         <div class="readout" id="readout"></div>
-        <span class="hint">Click to restart · illustration, not paper results</span>
+        <span class="hint" data-i18n="lab.hint">Click to restart · illustration, not paper results</span>
       </div>
     </div>
   </div>
@@ -421,8 +451,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="experience" class="rule">
   <div class="wrap">
     <div class="head">
-      <div class="label">Experience</div>
-      <div><h2>Teaching, building, researching.</h2><p>Most recent first.</p></div>
+      <div class="label" data-i18n="exp.label">Experience</div>
+      <div><h2 data-i18n="exp.h2">Teaching, building, researching.</h2><p data-i18n="exp.p">Most recent first.</p><p class="tr-note" data-i18n="note" hidden></p></div>
     </div>
     <div class="ledger">
       <article class="row rv">
@@ -478,15 +508,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="work" class="rule">
   <div class="wrap">
     <div class="head">
-      <div class="label">Selected work</div>
-      <div><h2>Software that solves real problems.</h2><p>Built for real users under real constraints: unstable power, weak connectivity, and people who need the thing to simply work.</p></div>
+      <div class="label" data-i18n="work.label">Selected work</div>
+      <div><h2 data-i18n="work.h2">Software that solves real problems.</h2><p data-i18n="work.p">Built for real users under real constraints: unstable power, weak connectivity, and people who need the thing to simply work.</p></div>
     </div>
 
     <article class="feature rv">
       <div class="copy">
         <span class="label" style="color:var(--sand)">Featured · 2026 · Health AI · Technical lead</span>
         <h3>DiaFootCare</h3>
-        <p>An iOS app, published on the App Store, that monitors diabetic foot wounds from phone photographs. It tracks healing over time and uses computer vision to identify tissue types and estimate wound size, with a calibration reference in the frame that turns pixels into real millimetres.</p>
+        <p data-i18n="dfc.p1">An iOS app, published on the App Store, that monitors diabetic foot wounds from phone photographs. It tracks healing over time and uses computer vision to identify tissue types and estimate wound size, with a calibration reference in the frame that turns pixels into real millimetres.</p>
         <p>Under the hood: a U-Net with a MobileNetV2 encoder and attention for segmentation, a CLIP ViT-B/32 encoder with SVM heads for five tissue classes, and fp16 TFLite models that run offline on the phone. The calibration-ring detector is classical computer vision, kept analytic so clinicians can audit every measurement.</p>
         <a class="trial" href="https://clinicaltrials.gov/study/NCT07815275" target="_blank" rel="noopener"><b>●</b> Clinical trial NCT07815275 · Oman MoH · 139 participants ↗</a>
         <div class="chips"><span class="chip">Flutter</span><span class="chip">TensorFlow · TFLite</span><span class="chip">U-Net</span><span class="chip">CLIP</span><span class="chip">Laravel API</span></div>
@@ -500,8 +530,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <article class="card rv"><span class="yr">2024 · EdTech</span><h3>Teacher Learning Platform</h3><p>Secure lecture-video platform with download protection, attendance tracking and personalised learning management.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">LMS</span></div></article>
       <article class="card rv"><span class="yr">2022–2024 · Research</span><h3>Evolutionary Timetable Scheduler</h3><p>A hybrid (1+1) evolution strategy with shotgun hill-climbing that produces near-optimal, conflict-reduced faculty timetables at Al-Aqsa University.</p><div class="chips"><span class="chip">Optimisation</span><span class="chip">Flutter Web</span></div></article>
       <article class="card rv"><span class="yr">2023 · FinTech</span><h3>Bitaqati: Driver Card System</h3><p>Digital card payments built with local authorities to solve Gaza's cash-change shortage on public transport.</p><div class="chips"><span class="chip">Payments</span><span class="chip">Flutter</span></div></article>
-      <article class="card rv"><span class="yr">2023–2024 · Team lead</span><h3>Volunteer-Work Department App</h3><p>Led a three-person team on a Flutter front-end and ASP.NET API that runs the university's volunteer operations. Delivered on schedule.</p><div class="chips"><span class="chip">ASP.NET</span><span class="chip">Flutter</span></div></article>
-      <article class="card rv"><span class="yr">2022–2023 · Commerce</span><h3>Delivery &amp; E-commerce</h3><p>A driver-to-customer delivery manager and a local online marketplace for browsing and buying products.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">Firebase</span></div></article>
+      <article class="card rv"><span class="yr">2023–2024 · Team lead</span><h3>Volunteer-Work Department App</h3><p>Led a three-person team on a Flutter front-end and REST API back-end that runs the university's volunteer operations. Delivered on schedule.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">REST API</span></div></article>
+      <article class="card rv"><span class="yr">2022–2023 · Commerce</span><h3>Delivery &amp; E-commerce</h3><p>A driver-to-customer delivery manager and a local online marketplace for browsing and buying products.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">Logistics</span></div></article>
     </div>
   </div>
 </section>
@@ -510,8 +540,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="research" class="rule">
   <div class="wrap">
     <div class="head">
-      <div class="label">Research</div>
-      <div><h2>Optimisation and honest evaluation.</h2><p>My research asks when a learning system works, on which data, and where it fails. Two papers are out and three more are being written, in diabetes care and in genomics.</p></div>
+      <div class="label" data-i18n="res.label">Research</div>
+      <div><h2 data-i18n="res.h2">Optimisation and honest evaluation.</h2><p data-i18n="res.p">My research asks when a learning system works, on which data, and where it fails. Two papers are out and three more are being written, in diabetes care and in genomics.</p></div>
     </div>
     <div class="pubs">
       <article class="pub rv">
@@ -541,7 +571,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         </div>
       </article>
     </div>
-    <div class="wip-head"><h3>In preparation</h3><span class="label">3 manuscripts · details on request</span></div>
+    <div class="wip-head"><h3 data-i18n="res.wip">In preparation</h3><span class="label">3 manuscripts · details on request</span></div>
     <div class="wip">
       <article class="card rv">
         <span class="state"><i></i>Manuscript in preparation</span>
@@ -572,8 +602,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="skills" class="rule">
   <div class="wrap">
     <div class="head">
-      <div class="label">Toolkit</div>
-      <div><h2>What I work with.</h2></div>
+      <div class="label" data-i18n="skills.label">Toolkit</div>
+      <div><h2 data-i18n="skills.h2">What I work with.</h2></div>
     </div>
   </div>
   <div class="marquee" aria-hidden="true">
@@ -587,9 +617,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="skill rv"><h3><i></i>Data science</h3><ul>
         <li>Python <small>primary</small></li><li>Pandas · NumPy</li><li>Matplotlib · Seaborn</li><li>SQL</li><li>Statistics &amp; experiment design</li><li>Bioinformatics data <small>omics data</small></li></ul></div>
       <div class="skill rv"><h3><i></i>Frameworks</h3><ul>
-        <li>PyTorch</li><li>TensorFlow · Keras</li><li>Hugging Face</li><li>NLTK</li><li>Django · FastAPI</li><li>ASP.NET</li></ul></div>
+        <li>PyTorch</li><li>TensorFlow · Keras</li><li>Hugging Face</li><li>NLTK</li><li>Django · FastAPI</li></ul></div>
       <div class="skill rv"><h3><i></i>Product &amp; engineering</h3><ul>
-        <li>Flutter · Dart <small>5+ yrs</small></li><li>iOS &amp; Android release</li><li>Firebase · Laravel · REST APIs</li><li>HTML · CSS · JavaScript</li><li>UX/UI · Figma</li><li>Git · Docker · Linux</li></ul></div>
+        <li>Flutter · Dart <small>5+ yrs</small></li><li>iOS &amp; Android release</li><li>Firebase · Laravel · REST APIs</li><li>HTML · CSS · JavaScript</li><li>UX/UI · Figma</li><li>Git · Docker</li></ul></div>
     </div>
   </div>
 </section>
@@ -598,18 +628,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section id="teaching" class="rule">
   <div class="wrap">
     <div class="head">
-      <div class="label">Teaching &amp; beyond</div>
-      <div><h2>Explaining clearly is part of the job.</h2><p>Courses I have designed and taught at university level.</p></div>
+      <div class="label" data-i18n="teach.label">Teaching &amp; beyond</div>
+      <div><h2 data-i18n="teach.h2">Explaining clearly is part of the job.</h2><p data-i18n="teach.p">Courses I have designed and taught at university level.</p></div>
     </div>
     <div class="courses rv">
       <span>Machine Learning</span><span>Data Science</span><span>Pattern Recognition</span><span>Mobile Application Programming</span><span>Cross-Platform Programming</span><span>UX/UI Design</span><span>IT Project Management</span><span>Java Programming</span><span>Python for Data Analysis</span><span>Web Development</span>
     </div>
     <div class="teach" style="margin-top:24px">
-      <div class="box rv"><h3>Volunteering</h3><ul>
+      <div class="box rv"><h3 data-i18n="teach.vol">Volunteering</h3><ul>
         <li><strong>Emergency water distribution, Gaza</strong> (Feb–Aug 2024). Planned, monitored and reported water distribution across three neighbourhoods under emergency conditions.</li>
         <li><strong>Career-guidance speaker</strong> (2022–2026). Sessions for students on programming, design and freelancing.</li></ul></div>
-      <div class="box rv"><h3>Languages &amp; interests</h3><ul>
-        <li><strong>Arabic</strong> native · <strong>English</strong> professional working proficiency · <strong>German</strong> learning</li>
+      <div class="box rv"><h3 data-i18n="teach.lang">Languages &amp; interests</h3><ul>
+        <li><strong>Arabic</strong> native · <strong>English</strong> professional working proficiency</li>
         <li>Health informatics and AI that helps clinicians in low-resource settings</li>
         <li>Mentoring students into research and freelancing</li>
         <li>Product design and clean, usable interfaces</li></ul></div>
@@ -622,13 +652,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="wrap">
     <div class="contact rv">
       <canvas id="orbit" aria-hidden="true"></canvas>
-      <div class="label" style="color:color-mix(in srgb,var(--on-deep) 62%,transparent)">Contact</div>
-      <h2>Let's build something <span>clinicians can trust.</span></h2>
-      <p>Open to research positions, supervision, collaborations and teaching. Email is the fastest way to reach me.</p>
+      <div class="label" style="color:color-mix(in srgb,var(--on-deep) 62%,transparent)" data-i18n="contact.label">Contact</div>
+      <h2 data-i18n="contact.h2">Let's build something <span>clinicians can trust.</span></h2>
+      <p data-i18n="contact.p">Open to research positions, supervision, collaborations and teaching. Email is the fastest way to reach me.</p>
       <div class="ways">
-        <div class="way"><span class="label">Email</span><span class="v" id="email">ish002197@gmail.com</span><button type="button" data-copy="email">Copy email</button></div>
-        <div class="way"><span class="label">Phone / WhatsApp</span><span class="v" id="phone">+972 59 283 3136</span><button type="button" data-copy="phone">Copy number</button></div>
-        <div class="way"><span class="label">Elsewhere</span><span class="v">LinkedIn · DiaFootCare</span>
+        <div class="way"><span class="label" data-i18n="contact.email">Email</span><span class="v" id="email">ish002197@gmail.com</span><button type="button" data-copy="email" data-i18n="copy.email">Copy email</button></div>
+        <div class="way"><span class="label" data-i18n="contact.phone">Phone / WhatsApp</span><span class="v" id="phone">+972 59 283 3136</span><button type="button" data-copy="phone" data-i18n="copy.phone">Copy number</button></div>
+        <div class="way"><span class="label" data-i18n="contact.else">Elsewhere</span><span class="v">LinkedIn · DiaFootCare</span>
           <a class="go" href="https://www.linkedin.com/search/results/all/?keywords=Ibrahim%20Khalil%20Shehada" target="_blank" rel="noopener">LinkedIn ↗</a>
           <a class="go" href="https://diafootcare.tech" target="_blank" rel="noopener">diafootcare.tech ↗</a></div>
       </div>
@@ -637,7 +667,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Ibrahim Khalil Shehada · Gaza, Palestine</span><span class="mono">Built with care, tested on real users.</span></div></footer>
+<footer><div class="wrap"><span data-i18n="footer.c">© 2026 Ibrahim Khalil Shehada · Gaza, Palestine</span><span class="mono" data-i18n="footer.u">Last updated: October 2026</span></div></footer>
 
 <script>
 (()=>{
@@ -651,6 +681,188 @@ const syncBtn=()=>tb.setAttribute('aria-label',isDark()?'Switch to light mode':'
 syncBtn();
 tb.addEventListener('click',()=>{const next=isDark()?'light':'dark';root.setAttribute('data-theme',next);try{localStorage.setItem('theme',next)}catch(e){}syncBtn();});
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',syncBtn);
+
+/* ============ LANGUAGES ============ */
+const I18N={
+ar:{_name:'العربية',
+'nav.about':'نبذة','nav.experience':'الخبرات','nav.work':'الأعمال','nav.research':'الأبحاث','nav.skills':'المهارات','nav.contact':'تواصل',
+'hero.status':'متاح لفرص الدكتوراه والبحث العلمي',
+'name1':'إبراهيم خليل','name2':'شحادة',
+'hero.role':'<strong>مهندس حاسوب ومحاضر جامعي وباحث في تعلّم الآلة</strong>، أطوّر أدوات رؤية حاسوبية يمكن للأطباء الوثوق بها.',
+'cta.contact':'تواصل معي','cta.work':'استعرض أعمالي','cta.cv':'تحميل السيرة الذاتية',
+'stat.students':'طالب درّستهم','stat.semesters':'فصلاً دراسياً','stat.apps':'تطبيقات قيد الاستخدام','stat.papers':'منشورات · 3 قيد الإعداد',
+'loc':'غزة، فلسطين',
+'about.label':'نبذة',
+'about.lede':'أبني أنظمة تقرأ الصور الطبية بعناية، وأسعى إلى أن أعرف <mark>متى بالضبط لا ينبغي الوثوق بها.</mark>',
+'about.p1':'مهندس حاسوب (الجامعة الإسلامية بغزة، 2020)، أمضيت أكثر من أربع سنوات محاضراً في كلية تكنولوجيا المعلومات بجامعة الأقصى، أدرّس تعلّم الآلة وعلم البيانات والتعرّف على الأنماط وبرمجة تطبيقات الهاتف. وقد درّست أكثر من 5,000 طالب في المساقات الجامعية وبرامج التدريب.',
+'about.p2':'إلى جانب التدريس أطوّر البرمجيات؛ فمنذ عام 2021 سلّمت ستة تطبيقات في مجالات الصحة والتعليم والمدفوعات، من بينها <strong>DiaFootCare</strong>، وهو تطبيق لمتابعة الجروح بالذكاء الاصطناعي يُستخدم اليوم في تجربة سريرية مسجّلة. وأستكمل حالياً درجة الماجستير في تكنولوجيا المعلومات في الجامعة الإسلامية بغزة، وأستعد للدكتوراه في مجال الرؤية الحاسوبية الطبية.',
+'lab.label':'من أبحاثي','lab.h2':'أربع خوارزميات تحسين، ووادٍ واحد.',
+'lab.p':'قارن بحثي الأول بين سبع خوارزميات تحسين (optimizers) للتعلّم العميق، وخلاصته أنه لا توجد خوارزمية تتفوّق في كل الحالات. في الأسفل تتسابق أربع منها مباشرةً نحو أدنى نقطة على سطح الخسارة نفسه. انقر أو المس أي موضع على السطح لاختيار نقطة بداية جديدة.',
+'lab.hint':'انقر لإعادة التشغيل · رسم توضيحي وليس نتائج البحث',
+'exp.label':'الخبرات','exp.h2':'تدريس، وتطوير، وبحث.','exp.p':'الأحدث أولاً.',
+'note':'التفاصيل أدناه باللغة الإنجليزية، وهي لغة أبحاثي المنشورة.',
+'work.label':'أعمال مختارة','work.h2':'برمجيات تحلّ مشكلات حقيقية.',
+'work.p':'صُمّمت لمستخدمين حقيقيين في ظروف صعبة: كهرباء غير مستقرة، واتصال ضعيف، وأشخاص يحتاجون ببساطة إلى أداة تعمل.',
+'dfc.p1':'تطبيق iOS منشور على متجر App Store لمتابعة جروح القدم السكرية من خلال صور الهاتف. يتتبّع التئام الجرح مع الوقت، ويستخدم الرؤية الحاسوبية لتحديد أنواع الأنسجة وتقدير مساحة الجرح، مستعيناً بمرجع معايرة داخل الصورة يحوّل البكسلات إلى مليمترات حقيقية.',
+'res.label':'الأبحاث','res.h2':'تحسين النماذج وتقييمها بأمانة.',
+'res.p':'يبحث عملي في سؤال: متى يعمل نظام التعلّم، وعلى أي بيانات، وأين يخفق؟ نُشر لي بحثان، وثلاثة أخرى قيد الإعداد في مجالَي رعاية مرضى السكري وعلم الجينوم.',
+'res.wip':'قيد الإعداد',
+'skills.label':'الأدوات','skills.h2':'ما أعمل به.',
+'teach.label':'التدريس وما بعده','teach.h2':'الشرح الواضح جزء من العمل.','teach.p':'مساقات صمّمتها ودرّستها على المستوى الجامعي.',
+'teach.vol':'العمل التطوعي','teach.lang':'اللغات والاهتمامات',
+'contact.label':'تواصل','contact.h2':'لنبنِ معاً أدوات <span>يثق بها الأطباء.</span>',
+'contact.p':'منفتح على فرص البحث والإشراف والتعاون والتدريس. البريد الإلكتروني هو أسرع وسيلة للتواصل معي.',
+'contact.email':'البريد الإلكتروني','contact.phone':'الهاتف / واتساب','contact.else':'روابط أخرى',
+'copy.email':'نسخ البريد','copy.phone':'نسخ الرقم','copied':'تم النسخ','selected':'تم التحديد، اضغط Ctrl+C',
+'footer.c':'© 2026 إبراهيم خليل شحادة · غزة، فلسطين','footer.u':'آخر تحديث: أكتوبر 2026'},
+pt:{_name:'Português',
+'nav.about':'Sobre','nav.experience':'Experiência','nav.work':'Projetos','nav.research':'Pesquisa','nav.skills':'Competências','nav.contact':'Contato',
+'hero.status':'Disponível para doutorado e posições de pesquisa',
+'hero.role':'<strong>Engenheiro de computação, professor universitário e pesquisador em aprendizado de máquina</strong>, desenvolvo ferramentas de visão computacional em que profissionais de saúde possam confiar.',
+'cta.contact':'Entre em contato','cta.work':'Ver meus projetos','cta.cv':'Baixar CV',
+'stat.students':'alunos','stat.semesters':'semestres letivos','stat.apps':'aplicativos em produção','stat.papers':'publicações · 3 em preparação',
+'loc':'Gaza, Palestina',
+'about.label':'Sobre',
+'about.lede':'Construo sistemas que leem imagens médicas com cuidado e quero saber <mark>exatamente quando não se deve confiar neles.</mark>',
+'about.p1':'Sou engenheiro de computação (Universidade Islâmica de Gaza, 2020) e há mais de quatro anos leciono na Faculdade de Tecnologia da Informação da Universidade Al-Aqsa, com disciplinas de Aprendizado de Máquina, Ciência de Dados, Reconhecimento de Padrões e Programação para Dispositivos Móveis. Somando cursos universitários e programas de capacitação, já ensinei mais de 5.000 alunos.',
+'about.p2':'Além da docência, desenvolvo software. Desde 2021 entreguei seis aplicativos em produção nas áreas de saúde, educação e pagamentos, entre eles o <strong>DiaFootCare</strong>, um aplicativo de acompanhamento de feridas com IA que hoje é a intervenção de um ensaio clínico registrado. Estou concluindo o mestrado em Tecnologia da Informação na Universidade Islâmica de Gaza e me preparando para o doutorado em visão computacional aplicada à medicina.',
+'lab.label':'Da minha pesquisa','lab.h2':'Quatro otimizadores, um vale.',
+'lab.p':'Meu primeiro artigo comparou sete otimizadores de aprendizado profundo, e a lição foi clara: nenhum otimizador vence em todos os casos. Abaixo, quatro deles descem a mesma superfície de perda em tempo real. Clique ou toque em qualquer ponto da superfície para escolher um novo ponto de partida.',
+'lab.hint':'Clique para reiniciar · ilustração, não são resultados do artigo',
+'exp.label':'Experiência','exp.h2':'Ensinar, construir, pesquisar.','exp.p':'Do mais recente ao mais antigo.',
+'note':'Os detalhes abaixo estão em inglês, o idioma das minhas publicações.',
+'work.label':'Projetos selecionados','work.h2':'Software que resolve problemas reais.',
+'work.p':'Feito para usuários reais em condições reais: energia instável, conexão fraca e pessoas que precisam que a ferramenta simplesmente funcione.',
+'dfc.p1':'Aplicativo para iOS, publicado na App Store, que acompanha feridas de pé diabético a partir de fotos do celular. Ele registra a cicatrização ao longo do tempo e usa visão computacional para identificar os tipos de tecido e estimar o tamanho da ferida, com uma referência de calibração na imagem que converte pixels em milímetros reais.',
+'res.label':'Pesquisa','res.h2':'Otimização e avaliação honesta.',
+'res.p':'Minha pesquisa investiga quando um sistema de aprendizado funciona, com quais dados e onde ele falha. Tenho dois artigos publicados e outros três em redação, nas áreas de cuidado do diabetes e genômica.',
+'res.wip':'Em preparação',
+'skills.label':'Ferramentas','skills.h2':'Com o que trabalho.',
+'teach.label':'Ensino e além','teach.h2':'Explicar com clareza faz parte do trabalho.','teach.p':'Disciplinas que planejei e lecionei no ensino superior.',
+'teach.vol':'Voluntariado','teach.lang':'Idiomas e interesses',
+'contact.label':'Contato','contact.h2':'Vamos construir algo <span>em que a equipe clínica possa confiar.</span>',
+'contact.p':'Aberto a posições de pesquisa, orientação, colaborações e docência. O e-mail é a forma mais rápida de falar comigo.',
+'contact.email':'E-mail','contact.phone':'Telefone / WhatsApp','contact.else':'Outros links',
+'copy.email':'Copiar e-mail','copy.phone':'Copiar número','copied':'Copiado','selected':'Selecionado, pressione Ctrl+C',
+'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palestina','footer.u':'Última atualização: outubro de 2026'},
+fr:{_name:'Français',
+'nav.about':'À propos','nav.experience':'Parcours','nav.work':'Réalisations','nav.research':'Recherche','nav.skills':'Compétences','nav.contact':'Contact',
+'hero.status':'Ouvert aux postes de doctorat et de recherche',
+'hero.role':'<strong>Ingénieur en informatique, enseignant universitaire et chercheur en apprentissage automatique</strong>, je conçois des outils de vision par ordinateur auxquels les cliniciens peuvent se fier.',
+'cta.contact':'Me contacter','cta.work':'Voir mes réalisations','cta.cv':'Télécharger le CV',
+'stat.students':'étudiants formés','stat.semesters':'semestres d’enseignement','stat.apps':'applications en production','stat.papers':'publications · 3 en préparation',
+'loc':'Gaza, Palestine',
+'about.label':'À propos',
+'about.lede':'Je conçois des systèmes qui analysent les images médicales avec rigueur, et je veux savoir <mark>précisément quand il ne faut pas s’y fier.</mark>',
+'about.p1':'Ingénieur en informatique (Université islamique de Gaza, 2020), j’enseigne depuis plus de quatre ans à la Faculté des technologies de l’information de l’Université Al-Aqsa : apprentissage automatique, science des données, reconnaissance des formes et programmation mobile. Entre cours universitaires et programmes de formation, j’ai enseigné à plus de 5 000 étudiants.',
+'about.p2':'En parallèle de l’enseignement, je développe des logiciels. Depuis 2021, j’ai livré six applications en production dans la santé, l’éducation et le paiement, dont <strong>DiaFootCare</strong>, une application de suivi des plaies par IA qui constitue aujourd’hui l’intervention d’un essai clinique enregistré. Je termine un master en technologies de l’information à l’Université islamique de Gaza et je me prépare à un doctorat en vision par ordinateur appliquée à la médecine.',
+'lab.label':'Issu de ma recherche','lab.h2':'Quatre optimiseurs, une vallée.',
+'lab.p':'Mon premier article comparait sept optimiseurs d’apprentissage profond, avec une leçon claire : aucun ne l’emporte dans tous les cas. Ci-dessous, quatre d’entre eux descendent en direct la même surface de perte. Cliquez ou touchez la surface pour choisir un nouveau point de départ.',
+'lab.hint':'Cliquez pour relancer · illustration, pas les résultats de l’article',
+'exp.label':'Parcours','exp.h2':'Enseigner, construire, chercher.','exp.p':'Du plus récent au plus ancien.',
+'note':'Les détails ci-dessous sont en anglais, la langue de mes publications.',
+'work.label':'Réalisations choisies','work.h2':'Des logiciels qui résolvent de vrais problèmes.',
+'work.p':'Conçus pour de vrais utilisateurs, sous de vraies contraintes : électricité instable, connexion faible, et des personnes qui ont simplement besoin que l’outil fonctionne.',
+'dfc.p1':'Application iOS publiée sur l’App Store, qui assure le suivi des plaies du pied diabétique à partir de photos prises au téléphone. Elle suit la cicatrisation dans le temps et utilise la vision par ordinateur pour identifier les types de tissus et estimer la taille de la plaie, grâce à une référence de calibration dans l’image qui convertit les pixels en millimètres réels.',
+'res.label':'Recherche','res.h2':'Optimisation et évaluation honnête.',
+'res.p':'Ma recherche cherche à savoir quand un système d’apprentissage fonctionne, sur quelles données, et où il échoue. Deux articles sont parus et trois autres sont en cours de rédaction, sur le diabète et la génomique.',
+'res.wip':'En préparation',
+'skills.label':'Boîte à outils','skills.h2':'Mes outils de travail.',
+'teach.label':'Enseignement et engagement','teach.h2':'Bien expliquer fait partie du métier.','teach.p':'Cours que j’ai conçus et enseignés à l’université.',
+'teach.vol':'Bénévolat','teach.lang':'Langues et centres d’intérêt',
+'contact.label':'Contact','contact.h2':'Construisons des outils <span>dignes de la confiance des cliniciens.</span>',
+'contact.p':'Ouvert aux postes de recherche, à l’encadrement, aux collaborations et à l’enseignement. L’e-mail est le moyen le plus rapide de me joindre.',
+'contact.email':'E-mail','contact.phone':'Téléphone / WhatsApp','contact.else':'Ailleurs',
+'copy.email':'Copier l’e-mail','copy.phone':'Copier le numéro','copied':'Copié','selected':'Sélectionné, appuyez sur Ctrl+C',
+'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palestine','footer.u':'Dernière mise à jour : octobre 2026'},
+es:{_name:'Español',
+'nav.about':'Sobre mí','nav.experience':'Experiencia','nav.work':'Proyectos','nav.research':'Investigación','nav.skills':'Habilidades','nav.contact':'Contacto',
+'hero.status':'Disponible para doctorado y puestos de investigación',
+'hero.role':'<strong>Ingeniero informático, profesor universitario e investigador en aprendizaje automático</strong>; desarrollo herramientas de visión por computadora en las que el personal clínico pueda confiar.',
+'cta.contact':'Contáctame','cta.work':'Ver mis proyectos','cta.cv':'Descargar CV',
+'stat.students':'estudiantes','stat.semesters':'semestres de docencia','stat.apps':'aplicaciones en producción','stat.papers':'publicaciones · 3 en preparación',
+'loc':'Gaza, Palestina',
+'about.label':'Sobre mí',
+'about.lede':'Construyo sistemas que leen imágenes médicas con cuidado, y quiero saber <mark>exactamente cuándo no hay que fiarse de ellos.</mark>',
+'about.p1':'Soy ingeniero informático (Universidad Islámica de Gaza, 2020) y llevo más de cuatro años como profesor en la Facultad de Tecnologías de la Información de la Universidad Al-Aqsa, donde imparto Aprendizaje Automático, Ciencia de Datos, Reconocimiento de Patrones y Programación de Aplicaciones Móviles. Entre cursos universitarios y programas de formación, he enseñado a más de 5000 estudiantes.',
+'about.p2':'Además de enseñar, desarrollo software. Desde 2021 he entregado seis aplicaciones en producción en salud, educación y pagos, entre ellas <strong>DiaFootCare</strong>, una aplicación de seguimiento de heridas con IA que hoy es la intervención de un ensayo clínico registrado. Estoy terminando un máster en Tecnologías de la Información en la Universidad Islámica de Gaza y preparándome para un doctorado en visión por computadora aplicada a la medicina.',
+'lab.label':'De mi investigación','lab.h2':'Cuatro optimizadores, un valle.',
+'lab.p':'Mi primer artículo comparó siete optimizadores de aprendizaje profundo, con una lección clara: ninguno gana en todos los casos. Abajo, cuatro de ellos descienden en directo por la misma superficie de pérdida. Haz clic o toca cualquier punto de la superficie para elegir un nuevo punto de partida.',
+'lab.hint':'Haz clic para reiniciar · ilustración, no son resultados del artículo',
+'exp.label':'Experiencia','exp.h2':'Enseñar, construir, investigar.','exp.p':'De lo más reciente a lo más antiguo.',
+'note':'Los detalles a continuación están en inglés, el idioma de mis publicaciones.',
+'work.label':'Proyectos destacados','work.h2':'Software que resuelve problemas reales.',
+'work.p':'Pensado para usuarios reales en condiciones reales: electricidad inestable, conexión débil y personas que necesitan que la herramienta simplemente funcione.',
+'dfc.p1':'Aplicación para iOS, publicada en la App Store, que hace el seguimiento de heridas de pie diabético a partir de fotos del móvil. Registra la cicatrización a lo largo del tiempo y usa visión por computadora para identificar los tipos de tejido y estimar el tamaño de la herida, con una referencia de calibración en la imagen que convierte píxeles en milímetros reales.',
+'res.label':'Investigación','res.h2':'Optimización y evaluación honesta.',
+'res.p':'Mi investigación se pregunta cuándo funciona un sistema de aprendizaje, con qué datos y dónde falla. Tengo dos artículos publicados y otros tres en redacción, sobre diabetes y genómica.',
+'res.wip':'En preparación',
+'skills.label':'Herramientas','skills.h2':'Con qué trabajo.',
+'teach.label':'Docencia y más','teach.h2':'Explicar con claridad es parte del trabajo.','teach.p':'Asignaturas que he diseñado e impartido en la universidad.',
+'teach.vol':'Voluntariado','teach.lang':'Idiomas e intereses',
+'contact.label':'Contacto','contact.h2':'Construyamos algo <span>en lo que el personal clínico pueda confiar.</span>',
+'contact.p':'Abierto a puestos de investigación, dirección de tesis, colaboraciones y docencia. El correo electrónico es la forma más rápida de contactarme.',
+'contact.email':'Correo electrónico','contact.phone':'Teléfono / WhatsApp','contact.else':'En otros sitios',
+'copy.email':'Copiar correo','copy.phone':'Copiar número','copied':'Copiado','selected':'Seleccionado, pulsa Ctrl+C',
+'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palestina','footer.u':'Última actualización: octubre de 2026'},
+de:{_name:'Deutsch',
+'nav.about':'Über mich','nav.experience':'Werdegang','nav.work':'Projekte','nav.research':'Forschung','nav.skills':'Kenntnisse','nav.contact':'Kontakt',
+'hero.status':'Offen für Promotions- und Forschungsstellen',
+'hero.role':'<strong>Computeringenieur, Hochschuldozent und Forscher im Bereich maschinelles Lernen.</strong> Ich entwickle Computer-Vision-Werkzeuge, denen Ärztinnen und Ärzte vertrauen können.',
+'cta.contact':'Kontakt aufnehmen','cta.work':'Meine Projekte','cta.cv':'Lebenslauf herunterladen',
+'stat.students':'Studierende unterrichtet','stat.semesters':'Semester Lehre','stat.apps':'Apps im Einsatz','stat.papers':'Publikationen · 3 in Vorbereitung',
+'loc':'Gaza, Palästina',
+'about.label':'Über mich',
+'about.lede':'Ich baue Systeme, die medizinische Bilder sorgfältig auswerten, und will genau wissen, <mark>wann man ihnen nicht vertrauen sollte.</mark>',
+'about.p1':'Ich bin Computeringenieur (Islamische Universität Gaza, 2020) und lehre seit über vier Jahren an der Fakultät für Informationstechnologie der Al-Aqsa-Universität: maschinelles Lernen, Data Science, Mustererkennung und App-Entwicklung. In Hochschulkursen und Weiterbildungsprogrammen habe ich insgesamt mehr als 5.000 Studierende unterrichtet.',
+'about.p2':'Neben der Lehre entwickle ich Software. Seit 2021 habe ich sechs produktive Anwendungen in den Bereichen Gesundheit, Bildung und Zahlungsverkehr umgesetzt, darunter <strong>DiaFootCare</strong>, eine KI-gestützte App zur Wundüberwachung, die heute als Intervention in einer registrierten klinischen Studie eingesetzt wird. Derzeit schließe ich meinen Master in Informationstechnologie an der Islamischen Universität Gaza ab und bereite mich auf eine Promotion in medizinischer Bildanalyse vor.',
+'lab.label':'Aus meiner Forschung','lab.h2':'Vier Optimierer, ein Tal.',
+'lab.p':'Mein erstes Paper verglich sieben Optimierer für Deep Learning. Die Erkenntnis: Kein Optimierer gewinnt überall. Unten laufen vier von ihnen live dieselbe Verlustfläche hinab. Klicken oder tippen Sie auf die Fläche, um einen neuen Startpunkt zu setzen.',
+'lab.hint':'Klicken zum Neustart · Illustration, keine Ergebnisse aus dem Paper',
+'exp.label':'Werdegang','exp.h2':'Lehren, entwickeln, forschen.','exp.p':'Neueste Stationen zuerst.',
+'note':'Die Details unten sind auf Englisch, der Sprache meiner Publikationen.',
+'work.label':'Ausgewählte Projekte','work.h2':'Software, die echte Probleme löst.',
+'work.p':'Gebaut für echte Nutzer unter echten Bedingungen: instabiler Strom, schwache Verbindungen und Menschen, für die das Werkzeug einfach funktionieren muss.',
+'dfc.p1':'Eine iOS-App im App Store, die diabetische Fußwunden anhand von Smartphone-Fotos überwacht. Sie verfolgt die Wundheilung über die Zeit und erkennt mit Computer Vision Gewebetypen und Wundgröße. Eine Kalibrierungsreferenz im Bild rechnet dabei Pixel in echte Millimeter um.',
+'res.label':'Forschung','res.h2':'Optimierung und ehrliche Evaluation.',
+'res.p':'Meine Forschung fragt, wann ein lernendes System funktioniert, mit welchen Daten und wo es scheitert. Zwei Arbeiten sind erschienen, drei weitere entstehen gerade, in den Bereichen Diabetes und Genomik.',
+'res.wip':'In Vorbereitung',
+'skills.label':'Werkzeuge','skills.h2':'Womit ich arbeite.',
+'teach.label':'Lehre und mehr','teach.h2':'Klar erklären gehört zum Beruf.','teach.p':'Lehrveranstaltungen, die ich an der Universität konzipiert und gehalten habe.',
+'teach.vol':'Ehrenamt','teach.lang':'Sprachen und Interessen',
+'contact.label':'Kontakt','contact.h2':'Lassen Sie uns etwas bauen, <span>dem Kliniker vertrauen.</span>',
+'contact.p':'Offen für Forschungsstellen, Betreuung, Kooperationen und Lehre. Per E-Mail erreichen Sie mich am schnellsten.',
+'contact.email':'E-Mail','contact.phone':'Telefon / WhatsApp','contact.else':'Weitere Profile',
+'copy.email':'E-Mail kopieren','copy.phone':'Nummer kopieren','copied':'Kopiert','selected':'Markiert, jetzt Strg+C drücken',
+'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palästina','footer.u':'Zuletzt aktualisiert: Oktober 2026'}
+};
+const LANGS=['en','ar','pt','fr','es','de'];
+const EN={_name:'English'};
+const i18nEls=[...document.querySelectorAll('[data-i18n]')];
+i18nEls.forEach(el=>{EN[el.dataset.i18n]=el.innerHTML;});
+EN.copied='Copied'; EN.selected='Selected, press Ctrl+C';
+let LANG='en';
+const T=k=>(I18N[LANG]&&I18N[LANG][k])||EN[k]||'';
+function setLang(l,save){
+  if(!LANGS.includes(l)) l='en'; LANG=l;
+  const d=l==='en'?EN:I18N[l];
+  i18nEls.forEach(el=>{const k=el.dataset.i18n; const v=d[k]!==undefined?d[k]:EN[k]; if(v!==undefined) el.innerHTML=v; el.dir='auto';});
+  root.lang=l; root.dir=l==='ar'?'rtl':'ltr';
+  const note=document.querySelector('[data-i18n="note"]'); if(note) note.hidden=(l==='en');
+  document.getElementById('langCode').textContent=l.toUpperCase();
+  document.querySelectorAll('#langMenu [data-lang]').forEach(b=>b.setAttribute('aria-checked',b.dataset.lang===l));
+  if(save){try{localStorage.setItem('lang',l)}catch(e){}}
+}
+const lb=document.getElementById('langBtn'), lm=document.getElementById('langMenu');
+lm.innerHTML=LANGS.map(l=>`<button type="button" role="menuitemradio" data-lang="${l}" lang="${l}" aria-checked="false">${(l==='en'?EN:I18N[l])._name}<small>${l.toUpperCase()}</small></button>`).join('');
+const closeMenu=()=>{lm.hidden=true;lb.setAttribute('aria-expanded','false');};
+lb.addEventListener('click',e=>{e.stopPropagation();const open=lm.hidden;lm.hidden=!open;lb.setAttribute('aria-expanded',open);if(open)lm.querySelector('[aria-checked="true"]')?.focus();});
+lm.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(!b)return;setLang(b.dataset.lang,true);closeMenu();lb.focus();});
+document.addEventListener('click',e=>{if(!lm.hidden&&!lm.contains(e.target))closeMenu();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lm.hidden){closeMenu();lb.focus();}});
+(function(){let l=null;try{l=new URLSearchParams(location.search).get('lang')}catch(e){}
+  if(!LANGS.includes(l)){try{l=localStorage.getItem('lang')}catch(e){}}
+  setLang(LANGS.includes(l)?l:'en',false);})();
 
 /* scroll progress + active nav */
 const prog=document.getElementById('progress');
@@ -709,8 +921,8 @@ fill('t1',A); fill('t2',B);
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
   const el=document.getElementById(b.dataset.copy), txt=el.textContent.trim(), orig=b.textContent;
   const done=m=>{b.textContent=m; setTimeout(()=>b.textContent=orig,1800);};
-  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);done('Selected — press Ctrl+C');};
-  try{ navigator.clipboard.writeText(txt).then(()=>done('Copied'),sel);}catch(_){sel();}
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);done(T('selected'));};
+  try{ navigator.clipboard.writeText(txt).then(()=>done(T('copied')),sel);}catch(_){sel();}
 }));
 
 /* research diagram pulse */
