@@ -94,6 +94,10 @@ p{margin:0}
 :root[data-theme="dark"] .theme-btn .moon{display:block}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme-btn .sun{display:none}:root:not([data-theme="light"]) .theme-btn .moon{display:block}}
 
+.flag{display:inline-flex;width:20px;height:14px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 18%,transparent);flex:none}
+.flag svg{width:100%;height:100%;display:block}
+.lm-l{display:inline-flex;align-items:center;gap:10px}
+#langFlag{display:inline-flex}
 .lang{position:relative}
 .lang-btn{all:unset;cursor:pointer;height:36px;padding:0 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:var(--f-mono);font-size:.78rem;transition:border-color .2s}
 .lang-btn:hover{border-color:var(--sea)}
@@ -319,8 +323,9 @@ section{padding-block:clamp(56px,8vw,104px)}
 .contact h2{font-size:clamp(2rem,5.4vw,4rem);font-weight:800;letter-spacing:-.035em;max-width:16ch}
 .contact h2 span{color:var(--deep-accent)}
 .contact p{max-width:52ch;margin-top:14px;opacity:.8}
-.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px;position:relative;z-index:1}
-@media (max-width:760px){.ways{grid-template-columns:1fr}}
+.ways{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;position:relative;z-index:1}
+@media (max-width:980px){.ways{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.ways{grid-template-columns:1fr}}
 .way{border:1px solid var(--deep-line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .way .label{color:color-mix(in srgb,var(--on-deep) 62%,transparent)}
 .way .v{font-family:var(--f-mono);font-size:.92rem;word-break:break-all;user-select:all}
@@ -358,7 +363,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     </nav>
     <div class="lang">
       <button type="button" class="lang-btn" id="langBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="langMenu" aria-label="Language">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg>
+        <span id="langFlag"></span>
         <span id="langCode">EN</span>
       </button>
       <div class="lang-menu" id="langMenu" role="menu" aria-label="Choose language" hidden></div>
@@ -661,6 +666,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="way"><span class="label" data-i18n="contact.else">Elsewhere</span><span class="v">LinkedIn · DiaFootCare</span>
           <a class="go" href="https://www.linkedin.com/search/results/all/?keywords=Ibrahim%20Khalil%20Shehada" target="_blank" rel="noopener">LinkedIn ↗</a>
           <a class="go" href="https://diafootcare.tech" target="_blank" rel="noopener">diafootcare.tech ↗</a></div>
+        <div class="way"><span class="label" data-i18n="contact.cv">CV</span><span class="v">PDF · English</span>
+          <a class="go" href="https://ibraheemshehada.github.io/Ibrahim_Shehada_CV.pdf" target="_blank" rel="noopener" download data-i18n="cv.short">CV · 2 pages ↗</a>
+          <a class="go" href="https://ibraheemshehada.github.io/Ibrahim_Shehada_CV_with_references.pdf" target="_blank" rel="noopener" download data-i18n="cv.ref">CV with references ↗</a></div>
       </div>
     </div>
   </div>
@@ -712,7 +720,7 @@ ar:{_name:'العربية',
 'teach.vol':'العمل التطوعي','teach.lang':'اللغات والاهتمامات',
 'contact.label':'تواصل','contact.h2':'لنبنِ معاً أدوات <span>يثق بها الأطباء.</span>',
 'contact.p':'منفتح على فرص البحث والإشراف والتعاون والتدريس. البريد الإلكتروني هو أسرع وسيلة للتواصل معي.',
-'contact.email':'البريد الإلكتروني','contact.phone':'الهاتف / واتساب','contact.else':'روابط أخرى',
+'contact.email':'البريد الإلكتروني','contact.phone':'الهاتف / واتساب','contact.else':'روابط أخرى','contact.cv':'السيرة الذاتية','cv.short':'سيرة ذاتية · صفحتان ↗','cv.ref':'مع أسماء المزكّين ↗',
 'copy.email':'نسخ البريد','copy.phone':'نسخ الرقم','copied':'تم النسخ','selected':'تم التحديد، اضغط Ctrl+C',
 'footer.c':'© 2026 إبراهيم خليل شحادة · غزة، فلسطين','footer.u':'آخر تحديث: أكتوبر 2026'},
 pt:{_name:'Português',
@@ -742,7 +750,7 @@ pt:{_name:'Português',
 'teach.vol':'Voluntariado','teach.lang':'Idiomas e interesses',
 'contact.label':'Contato','contact.h2':'Vamos construir algo <span>em que a equipe clínica possa confiar.</span>',
 'contact.p':'Aberto a posições de pesquisa, orientação, colaborações e docência. O e-mail é a forma mais rápida de falar comigo.',
-'contact.email':'E-mail','contact.phone':'Telefone / WhatsApp','contact.else':'Outros links',
+'contact.email':'E-mail','contact.phone':'Telefone / WhatsApp','contact.else':'Outros links','contact.cv':'Currículo','cv.short':'Currículo · 2 páginas ↗','cv.ref':'Currículo com referências ↗',
 'copy.email':'Copiar e-mail','copy.phone':'Copiar número','copied':'Copiado','selected':'Selecionado, pressione Ctrl+C',
 'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palestina','footer.u':'Última atualização: outubro de 2026'},
 fr:{_name:'Français',
@@ -772,7 +780,7 @@ fr:{_name:'Français',
 'teach.vol':'Bénévolat','teach.lang':'Langues et centres d’intérêt',
 'contact.label':'Contact','contact.h2':'Construisons des outils <span>dignes de la confiance des cliniciens.</span>',
 'contact.p':'Ouvert aux postes de recherche, à l’encadrement, aux collaborations et à l’enseignement. L’e-mail est le moyen le plus rapide de me joindre.',
-'contact.email':'E-mail','contact.phone':'Téléphone / WhatsApp','contact.else':'Ailleurs',
+'contact.email':'E-mail','contact.phone':'Téléphone / WhatsApp','contact.else':'Ailleurs','contact.cv':'CV','cv.short':'CV · 2 pages ↗','cv.ref':'CV avec références ↗',
 'copy.email':'Copier l’e-mail','copy.phone':'Copier le numéro','copied':'Copié','selected':'Sélectionné, appuyez sur Ctrl+C',
 'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palestine','footer.u':'Dernière mise à jour : octobre 2026'},
 es:{_name:'Español',
@@ -802,7 +810,7 @@ es:{_name:'Español',
 'teach.vol':'Voluntariado','teach.lang':'Idiomas e intereses',
 'contact.label':'Contacto','contact.h2':'Construyamos algo <span>en lo que el personal clínico pueda confiar.</span>',
 'contact.p':'Abierto a puestos de investigación, dirección de tesis, colaboraciones y docencia. El correo electrónico es la forma más rápida de contactarme.',
-'contact.email':'Correo electrónico','contact.phone':'Teléfono / WhatsApp','contact.else':'En otros sitios',
+'contact.email':'Correo electrónico','contact.phone':'Teléfono / WhatsApp','contact.else':'En otros sitios','contact.cv':'Currículum','cv.short':'CV · 2 páginas ↗','cv.ref':'CV con referencias ↗',
 'copy.email':'Copiar correo','copy.phone':'Copiar número','copied':'Copiado','selected':'Seleccionado, pulsa Ctrl+C',
 'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palestina','footer.u':'Última actualización: octubre de 2026'},
 de:{_name:'Deutsch',
@@ -832,10 +840,23 @@ de:{_name:'Deutsch',
 'teach.vol':'Ehrenamt','teach.lang':'Sprachen und Interessen',
 'contact.label':'Kontakt','contact.h2':'Lassen Sie uns etwas bauen, <span>dem Kliniker vertrauen.</span>',
 'contact.p':'Offen für Forschungsstellen, Betreuung, Kooperationen und Lehre. Per E-Mail erreichen Sie mich am schnellsten.',
-'contact.email':'E-Mail','contact.phone':'Telefon / WhatsApp','contact.else':'Weitere Profile',
+'contact.email':'E-Mail','contact.phone':'Telefon / WhatsApp','contact.else':'Weitere Profile','contact.cv':'Lebenslauf','cv.short':'Lebenslauf · 2 Seiten ↗','cv.ref':'Lebenslauf mit Referenzen ↗',
 'copy.email':'E-Mail kopieren','copy.phone':'Nummer kopieren','copied':'Kopiert','selected':'Markiert, jetzt Strg+C drücken',
 'footer.c':'© 2026 Ibrahim Khalil Shehada · Gaza, Palästina','footer.u':'Zuletzt aktualisiert: Oktober 2026'}
 };
+/* flags drawn as SVG (emoji flags don't render on Windows) */
+function flag(l,k){
+  const id='uk'+k;
+  const F={
+    en:`<svg viewBox="0 0 60 30" preserveAspectRatio="none"><clipPath id="${id}"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><rect width="60" height="30" fill="#012169"/><path d="M0 0l60 30M60 0L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30M60 0L0 30" clip-path="url(#${id})" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></svg>`,
+    ar:`<svg viewBox="0 0 6 3" preserveAspectRatio="none"><rect width="6" height="1" fill="#000"/><rect y="1" width="6" height="1" fill="#fff"/><rect y="2" width="6" height="1" fill="#007A3D"/><path d="M0 0l2 1.5L0 3z" fill="#CE1126"/></svg>`,
+    pt:`<svg viewBox="0 0 20 14" preserveAspectRatio="none"><rect width="20" height="14" fill="#009C3B"/><path d="M10 1.6L18.4 7 10 12.4 1.6 7z" fill="#FFDF00"/><circle cx="10" cy="7" r="3.4" fill="#002776"/><path d="M6.8 6.2c2.2-.5 4.6-.2 6.5.9" stroke="#fff" stroke-width=".55" fill="none"/></svg>`,
+    fr:`<svg viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="1" height="2" fill="#0055A4"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#EF4135"/></svg>`,
+    es:`<svg viewBox="0 0 4 4" preserveAspectRatio="none"><rect width="4" height="4" fill="#AA151B"/><rect y="1" width="4" height="2" fill="#F1BF00"/></svg>`,
+    de:`<svg viewBox="0 0 5 3" preserveAspectRatio="none"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg>`
+  };
+  return `<span class="flag" aria-hidden="true">${F[l]||''}</span>`;
+}
 const LANGS=['en','ar','pt','fr','es','de'];
 const EN={_name:'English'};
 const i18nEls=[...document.querySelectorAll('[data-i18n]')];
@@ -850,11 +871,12 @@ function setLang(l,save){
   root.lang=l; root.dir=l==='ar'?'rtl':'ltr';
   const note=document.querySelector('[data-i18n="note"]'); if(note) note.hidden=(l==='en');
   document.getElementById('langCode').textContent=l.toUpperCase();
+  document.getElementById('langFlag').innerHTML=flag(l,'btn');
   document.querySelectorAll('#langMenu [data-lang]').forEach(b=>b.setAttribute('aria-checked',b.dataset.lang===l));
   if(save){try{localStorage.setItem('lang',l)}catch(e){}}
 }
 const lb=document.getElementById('langBtn'), lm=document.getElementById('langMenu');
-lm.innerHTML=LANGS.map(l=>`<button type="button" role="menuitemradio" data-lang="${l}" lang="${l}" aria-checked="false">${(l==='en'?EN:I18N[l])._name}<small>${l.toUpperCase()}</small></button>`).join('');
+lm.innerHTML=LANGS.map(l=>`<button type="button" role="menuitemradio" data-lang="${l}" lang="${l}" aria-checked="false"><span class="lm-l">${flag(l,l)}${(l==='en'?EN:I18N[l])._name}</span><small>${l.toUpperCase()}</small></button>`).join('');
 const closeMenu=()=>{lm.hidden=true;lb.setAttribute('aria-expanded','false');};
 lb.addEventListener('click',e=>{e.stopPropagation();const open=lm.hidden;lm.hidden=!open;lb.setAttribute('aria-expanded',open);if(open)lm.querySelector('[aria-checked="true"]')?.focus();});
 lm.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(!b)return;setLang(b.dataset.lang,true);closeMenu();lb.focus();});
