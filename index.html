@@ -192,7 +192,7 @@ section{padding-block:clamp(56px,8vw,104px)}
 .feature .copy{padding:clamp(22px,4vw,40px);display:flex;flex-direction:column;gap:14px;min-width:0}
 .feature h3{font-size:var(--step-3);font-weight:800;letter-spacing:-.03em}
 .feature p{color:var(--ink-2)}
-.feature .viz{position:relative;background:var(--sea-soft);min-height:300px;overflow:hidden}
+.feature .viz{position:relative;background:var(--ground);min-height:360px;overflow:hidden;border-left:1px solid var(--line)}
 #wound{position:absolute;inset:0;width:100%;height:100%}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-family:var(--f-mono);font-size:.72rem;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--ground)}
@@ -474,7 +474,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="chips"><span class="chip">Flutter</span><span class="chip">TensorFlow · TFLite</span><span class="chip">U-Net</span><span class="chip">CLIP</span><span class="chip">Laravel API</span></div>
         <a class="lnk" href="https://diafootcare.tech" target="_blank" rel="noopener">diafootcare.tech ↗</a>
       </div>
-      <div class="viz"><canvas id="wound" aria-label="Animated illustration of wound segmentation with tissue classes and a measurement"></canvas></div>
+      <div class="viz"><canvas id="wound" aria-label="Illustration of a foot with a diabetic ulcer, segmented by AI into granulation, slough and necrotic tissue, with area and calibration ring"></canvas></div>
     </article>
 
     <div class="grid">
@@ -767,40 +767,102 @@ new MutationObserver(rethink).observe(document.documentElement,{attributes:true,
 /* ============ WOUND SEGMENTATION ILLUSTRATION ============ */
 const wc=document.getElementById('wound'), wx=wc.getContext('2d'); let wpaint;
 (function(){
-  let WW,WH,dp; function size(){dp=Math.min(2,devicePixelRatio||1);const r=wc.getBoundingClientRect();WW=r.width;WH=r.height;wc.width=WW*dp;wc.height=WH*dp;wx.setTransform(dp,0,0,dp,0,0);}
-  const blob=(cx,cy,R,seed,t,amp)=>{const pts=[];for(let i=0;i<=64;i++){const a=i/64*Math.PI*2;const n=Math.sin(a*3+seed)*.12+Math.sin(a*5+seed*2+t*.6)*.06*amp+Math.sin(a*2-seed)*.08;pts.push([cx+Math.cos(a)*R*(1+n),cy+Math.sin(a)*R*(1+n)*.78]);}return pts;};
-  const path=p=>{wx.beginPath();p.forEach((q,i)=>i?wx.lineTo(q[0],q[1]):wx.moveTo(q[0],q[1]));wx.closePath();};
+  let WW,WH,dp;
+  function size(){dp=Math.min(2,devicePixelRatio||1);const r=wc.getBoundingClientRect();WW=r.width;WH=r.height;wc.width=WW*dp;wc.height=WH*dp;wx.setTransform(dp,0,0,dp,0,0);}
+  // foot drawn in a 200 x 400 unit box (plantar view, heel at the bottom)
+  function sole(){
+    wx.beginPath();
+    wx.moveTo(100,395);
+    wx.bezierCurveTo(48,396,30,345,37,292);
+    wx.bezierCurveTo(44,245,58,205,47,155);
+    wx.bezierCurveTo(37,108,52,72,96,63);
+    wx.bezierCurveTo(140,56,176,72,173,112);
+    wx.bezierCurveTo(171,160,151,202,153,250);
+    wx.bezierCurveTo(156,300,166,350,141,384);
+    wx.bezierCurveTo(131,396,116,396,100,395);
+    wx.closePath();
+  }
+  const TOES=[[70,44,23,29,-.12],[108,36,13,16,0],[132,44,11.5,14,.1],[151,58,10,12.5,.2],[166,76,8.5,10.5,.3]];
+  // wound outline in foot units, stable shape with a slow, small breathing motion
+  const blob=(cx,cy,R,seed,t,amp)=>{const p=[];for(let i=0;i<=72;i++){const a=i/72*Math.PI*2;const n=Math.sin(a*3+seed)*.13+Math.sin(a*2-seed)*.09+Math.sin(a*5+seed*2+t*.5)*.025*amp;p.push([cx+Math.cos(a)*R*(1+n),cy+Math.sin(a)*R*(1+n)*.82]);}return p;};
+  const path=(p,k=1,ox=0,oy=0,ky=k)=>{wx.beginPath();p.forEach((q,i)=>{const x=ox+q[0]*k,y=oy+q[1]*ky;i?wx.lineTo(x,y):wx.moveTo(x,y);});wx.closePath();};
+  const WCX=86, WCY=116;
   function frame(ts){
-    const t=ts/1000; wx.clearRect(0,0,WW,WH);
-    const cx=WW*.5,cy=WH*.52,R=Math.min(WW,WH)*.26;
-    // grid
-    wx.strokeStyle=css('--contour'); wx.lineWidth=1; wx.globalAlpha=.6;
-    for(let x=0;x<WW;x+=24){wx.beginPath();wx.moveTo(x,0);wx.lineTo(x,WH);wx.stroke();}
-    for(let y=0;y<WH;y+=24){wx.beginPath();wx.moveTo(0,y);wx.lineTo(WW,y);wx.stroke();}
+    const t=ts/1000, amp=reduce?0:1;
+    wx.clearRect(0,0,WW,WH);
+    // faint measurement grid
+    wx.strokeStyle=css('--line'); wx.lineWidth=1; wx.globalAlpha=.55;
+    for(let x=0;x<WW;x+=28){wx.beginPath();wx.moveTo(x+.5,0);wx.lineTo(x+.5,WH);wx.stroke();}
+    for(let y=0;y<WH;y+=28){wx.beginPath();wx.moveTo(0,y+.5);wx.lineTo(WW,y+.5);wx.stroke();}
     wx.globalAlpha=1;
-    const amp=reduce?0:1;
-    const outer=blob(cx,cy,R,1.3,t,amp), mid=blob(cx+R*.08,cy,R*.62,2.1,t*1.2,amp), core=blob(cx-R*.1,cy+R*.05,R*.3,3.7,t*1.4,amp);
-    const prog=reduce?1:(Math.sin(t*.7)*.5+.5);
-    wx.globalAlpha=.85; wx.fillStyle=css('--rose'); path(outer); wx.fill();
-    wx.fillStyle=css('--sand'); path(mid); wx.fill();
-    wx.fillStyle=css('--olive'); path(core); wx.fill(); wx.globalAlpha=1;
-    // sweeping segmentation edge
-    wx.save(); wx.beginPath(); wx.rect(0,0,WW*(.15+prog*.85),WH); wx.clip();
-    wx.strokeStyle=css('--ink'); wx.lineWidth=2; wx.setLineDash([6,5]); wx.lineDashOffset=-t*20; path(outer); wx.stroke(); wx.restore();
-    wx.setLineDash([]);
-    // scan line
-    const sx=WW*(.15+prog*.85); wx.strokeStyle=css('--sea'); wx.lineWidth=2; wx.beginPath(); wx.moveTo(sx,0); wx.lineTo(sx,WH); wx.stroke();
-    // calibration ruler
-    const rx=WW*.1, ry=WH*.88, rl=Math.min(120,WW*.3);
-    wx.strokeStyle=css('--ink'); wx.lineWidth=2; wx.beginPath(); wx.moveTo(rx,ry); wx.lineTo(rx+rl,ry); wx.stroke();
-    for(let i=0;i<=10;i++){wx.beginPath();wx.moveTo(rx+rl*i/10,ry);wx.lineTo(rx+rl*i/10,ry-(i%5?5:10));wx.stroke();}
-    wx.fillStyle=css('--ink'); wx.font='500 11px "JetBrains Mono", monospace'; wx.fillText('calibration · 10 mm',rx,ry+16);
-    // labels
-    const lab=(txt,col,x,y)=>{wx.font='500 11px "JetBrains Mono", monospace';const w=wx.measureText(txt).width+12;wx.fillStyle=css('--panel');wx.fillRect(x,y-14,w,20);wx.fillStyle=col;wx.fillRect(x,y-14,3,20);wx.fillStyle=css('--ink');wx.fillText(txt,x+7,y);};
-    lab('granulation',css('--rose'),WW*.06,WH*.14);
-    lab('slough',css('--sand'),WW*.06,WH*.14+26);
-    lab('necrotic',css('--olive'),WW*.06,WH*.14+52);
-    lab('area ≈ '+(4.2+Math.sin(t*.7)*.06).toFixed(2)+' cm²',css('--sea'),WW*.62,WH*.14);
+
+    const s=Math.min(WH*.86/400, WW*.40/200), kx=s*1.22, fw=200*kx, ox=Math.max(10,WW*.36-fw/2-20*kx), oy=(WH-400*s)/2;
+
+    // ---- foot ----
+    wx.save(); wx.translate(ox,oy); wx.scale(kx,s);
+    const g=wx.createLinearGradient(30,0,178,0);
+    g.addColorStop(0,'#C99377'); g.addColorStop(.45,'#E6BFA2'); g.addColorStop(1,'#CF9C7F');
+    wx.shadowColor='rgba(20,30,28,.22)'; wx.shadowBlur=26; wx.shadowOffsetY=10;
+    wx.fillStyle=g; sole(); wx.fill();
+    TOES.forEach(([x,y,rx,ry,r])=>{wx.beginPath();wx.ellipse(x,y,rx,ry,r,0,Math.PI*2);wx.fill();});
+    wx.shadowColor='transparent';
+    // arch shadow and heel / ball highlights
+    let rg=wx.createRadialGradient(62,215,4,62,215,46); rg.addColorStop(0,'rgba(120,70,50,.22)'); rg.addColorStop(1,'rgba(120,70,50,0)');
+    wx.fillStyle=rg; sole(); wx.fill();
+    rg=wx.createRadialGradient(100,340,6,100,340,58); rg.addColorStop(0,'rgba(255,240,228,.35)'); rg.addColorStop(1,'rgba(255,240,228,0)');
+    wx.fillStyle=rg; sole(); wx.fill();
+    wx.strokeStyle='rgba(110,62,44,.18)'; wx.lineWidth=1.2;
+    [[60,128,120,122],[64,140,128,134],[70,300,128,302]].forEach(([a,b,c,d])=>{wx.beginPath();wx.moveTo(a,b);wx.quadraticCurveTo((a+c)/2,b+8,c,d);wx.stroke();});
+    TOES.forEach(([x,y,rx,ry])=>{wx.beginPath();wx.ellipse(x,y-ry*.35,rx*.55,ry*.35,0,0,Math.PI*2);wx.fillStyle='rgba(255,238,225,.28)';wx.fill();});
+    // periwound redness
+    rg=wx.createRadialGradient(WCX,WCY,14,WCX,WCY,42); rg.addColorStop(0,'rgba(176,84,78,.38)'); rg.addColorStop(1,'rgba(176,84,78,0)');
+    wx.fillStyle=rg; wx.beginPath(); wx.arc(WCX,WCY,42,0,7); wx.fill();
+    // tissue layers
+    const outer=blob(WCX,WCY,25,1.3,t,amp), slough=blob(WCX+6,WCY-5,11,2.4,t,amp), necro=blob(WCX-9,WCY+6,6.5,3.9,t,amp);
+    rg=wx.createRadialGradient(WCX,WCY,2,WCX,WCY,27); rg.addColorStop(0,'#9E3F47'); rg.addColorStop(1,'#B85E60');
+    wx.fillStyle=rg; path(outer); wx.fill();
+    wx.fillStyle='rgba(120,40,40,.35)'; for(let i=0;i<26;i++){const a=i*2.4,r=5+((i*7)%17);wx.beginPath();wx.arc(WCX+Math.cos(a)*r,WCY+Math.sin(a)*r*.8,1.1,0,7);wx.fill();}
+    wx.fillStyle='#D8C089'; path(slough); wx.fill();
+    wx.fillStyle='#3F302C'; path(necro); wx.fill();
+    wx.restore();
+
+    // ---- AI overlay (screen space) ----
+    const sea=css('--sea'), ink=css('--ink'), panel=css('--panel');
+    const prog=reduce?1:((t*.16)%1.25);
+    const fx0=ox, fx1=ox+fw, top=oy, bot=oy+400*s;
+    const sweep=Math.min(1,prog);
+    // segmentation outline draws itself as the scan passes
+    wx.save(); wx.beginPath(); wx.rect(0,0,WW,top+(bot-top)*sweep); wx.clip();
+    wx.strokeStyle=sea; wx.lineWidth=2; wx.setLineDash([5,4]); wx.lineDashOffset=-t*14;
+    path(blob(WCX,WCY,25*1.16,1.3,t,amp),kx,ox,oy,s); wx.stroke(); wx.setLineDash([]);
+    // detection box corners
+    const bx=ox+(WCX-35)*kx, by=oy+(WCY-31)*s, bw=70*kx, bh=62*s, c=Math.max(8,10*s);
+    wx.lineWidth=2;
+    [[bx,by,1,1],[bx+bw,by,-1,1],[bx,by+bh,1,-1],[bx+bw,by+bh,-1,-1]].forEach(([x,y,dx,dy])=>{wx.beginPath();wx.moveTo(x+dx*c,y);wx.lineTo(x,y);wx.lineTo(x,y+dy*c);wx.stroke();});
+    wx.restore();
+    // horizontal scan band over the foot only
+    if(prog<1){ const sy=top+(bot-top)*sweep; const sg=wx.createLinearGradient(0,sy-26,0,sy);
+      sg.addColorStop(0,'rgba(108,196,200,0)'); sg.addColorStop(1,'rgba(108,196,200,.32)');
+      wx.fillStyle=sg; wx.fillRect(fx0-10,sy-26,fw+20,26);
+      wx.strokeStyle=sea; wx.lineWidth=1.5; wx.beginPath(); wx.moveTo(fx0-10,sy); wx.lineTo(fx1+10,sy); wx.stroke(); }
+
+    // labels with leader lines
+    const lab=(txt,col,x,y)=>{wx.font='500 11px "JetBrains Mono", monospace';const w=wx.measureText(txt).width+14;wx.fillStyle=panel;wx.globalAlpha=.94;wx.beginPath();wx.roundRect?wx.roundRect(x,y-13,w,21,5):wx.rect(x,y-13,w,21);wx.fill();wx.globalAlpha=1;wx.fillStyle=col;wx.fillRect(x,y-13,3,21);wx.fillStyle=ink;wx.fillText(txt,x+8,y+2);return w;};
+    const lx=Math.min(WW-150,fx1+18), shown=sweep>.22||reduce;
+    const pts=[['granulation','#B85E60',WCX+18,WCY+10,top+(WCY-12)*s],['slough','#C9AE6E',WCX+7,WCY-6,top+(WCY+20)*s],['necrotic','#3F302C',WCX-9,WCY+6,top+(WCY+52)*s]];
+    if(shown) pts.forEach(([n,col,px,py,ly])=>{
+      const sx=ox+px*kx, sy=oy+py*s;
+      wx.strokeStyle=css('--ink-2'); wx.lineWidth=1; wx.beginPath(); wx.moveTo(sx,sy); wx.lineTo(lx-8,ly); wx.lineTo(lx,ly); wx.stroke();
+      wx.fillStyle=css('--ink-2'); wx.beginPath(); wx.arc(sx,sy,2.2,0,7); wx.fill();
+      lab(n,col,lx,ly);
+    });
+    if(shown) lab('area ≈ '+(4.2+Math.sin(t*.5)*.03*amp).toFixed(2)+' cm²',sea,lx,top+(WCY-52)*s);
+    // calibration ring sticker beside the heel
+    const rx=Math.min(WW-40,fx1+46), ry=top+330*s, rr=Math.max(11,13*s);
+    wx.lineWidth=Math.max(4,5*s); wx.strokeStyle=sea; wx.beginPath(); wx.arc(rx,ry,rr,0,7); wx.stroke();
+    wx.lineWidth=1; wx.strokeStyle=ink; wx.beginPath(); wx.arc(rx,ry,rr+wx.lineWidth*3,0,7); wx.globalAlpha=.25; wx.stroke(); wx.globalAlpha=1;
+    wx.fillStyle=css('--ink-2'); wx.font='500 10.5px "JetBrains Mono", monospace'; wx.textAlign='center'; wx.fillText('calibration ring',rx,ry+rr+20); wx.textAlign='start';
+    wx.fillStyle=css('--ink-2'); wx.font='500 10px "JetBrains Mono", monospace'; wx.fillText('illustration',12,WH-12);
     if(!reduce) requestAnimationFrame(frame);
   }
   wpaint=()=>{size(); if(reduce) frame(0);};
