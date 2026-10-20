@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ibrahim Khalil Shehada</title>
+<meta name="description" content="Ibrahim Khalil Shehada — computer engineer, university lecturer and machine learning researcher building trustworthy AI for healthcare.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Kufi+Arabic:wght@500&display=swap">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Ibrahim Khalil Shehada · ML Researcher &amp; Lecturer">
+<meta property="og:description" content="Computer engineer, university lecturer and machine learning researcher building trustworthy AI for healthcare. Technical lead of DiaFootCare.">
+<meta property="og:image" content="https://ibraheemshehada.github.io/photo.jpg">
+<meta property="og:url" content="https://ibraheemshehada.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316302C'/%3E%3Ctext x='32' y='41' font-family='monospace' font-size='22' font-weight='700' fill='%238FD3D6' text-anchor='middle'%3EIKS%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ibrahim Khalil Shehada","jobTitle":"Lecturer and Machine Learning Researcher","affiliation":"Al-Aqsa University","alumniOf":"Islamic University of Gaza","email":"mailto:ish002197@gmail.com","url":"https://ibraheemshehada.github.io/"}</script>
+<style>
+/* Layout: a field notebook of a working ML engineer — portrait framed as a detection, a live loss landscape as the signature, then a dated ledger of work. */
+:root{
+  color-scheme:light;
+  --ground:#EDF1EE;      /* sage paper */
+  --panel:#F8FAF8;
+  --ink:#13201C;
+  --ink-2:#4A5A55;
+  --line:#CCD6D1;
+  --sea:#0E6873;         /* Gaza sea teal — the accent */
+  --sea-soft:#D4E7E7;
+  --sand:#9A6220;        /* warm second voice, used for data */
+  --olive:#5E7A3A;
+  --rose:#B2484A;
+  --violet:#5A54A3;
+  --contour:#A9BBB5;
+  --deep:#16302C;        /* contact band */
+  --on-deep:#E6EFEB;
+  --deep-line:#2E4B45;
+  --deep-accent:#8FD3D6;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  --f-ar:"Noto Kufi Arabic", "Segoe UI", Tahoma, sans-serif;
+  --step-0:1rem; --step-1:1.25rem; --step-2:1.6rem; --step-3:2.2rem; --step-4:clamp(2.6rem,7vw,5.4rem);
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#111A18; --panel:#17221F; --ink:#DCE5E1; --ink-2:#A3B4AE; --line:#2A3A35;
+  --sea:#6CC4C8; --sea-soft:#1B3836; --sand:#DDA762; --olive:#9BC06A; --rose:#E08585; --violet:#A9A2EE; --contour:#2F4741;
+  --deep:#1B3532; --on-deep:#E6EFEB; --deep-line:#355650; --deep-accent:#8FD3D6;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#111A18; --panel:#17221F; --ink:#DCE5E1; --ink-2:#A3B4AE; --line:#2A3A35;
+  --sea:#6CC4C8; --sea-soft:#1B3836; --sand:#DDA762; --olive:#9BC06A; --rose:#E08585; --violet:#A9A2EE; --contour:#2F4741;
+  --deep:#1B3532; --on-deep:#E6EFEB; --deep-line:#355650; --deep-accent:#8FD3D6;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ground)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sea);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.05}
+p{margin:0}
+.label{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.mono{font-family:var(--f-mono)}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--ground) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:800;letter-spacing:-.01em}
+.mark i{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--ink);color:var(--ground);font-style:normal;font-size:.8rem;font-family:var(--f-mono)}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{text-decoration:none;font-size:.88rem;padding:6px 10px;border-radius:999px;color:var(--ink-2);transition:color .2s,background .2s}
+.nav a:hover,.nav a.on{color:var(--ink);background:var(--sea-soft)}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--sea);transform-origin:0 50%;transform:scaleX(0)}
+@media (max-width:720px){.nav a:not(.keep){display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(40px,7vw,88px) 40px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hello{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;padding:5px 12px 5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.status b{width:8px;height:8px;border-radius:50%;background:var(--olive);box-shadow:0 0 0 0 var(--olive);animation:ping 2.4s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--olive) 60%,transparent)}80%,100%{box-shadow:0 0 0 9px transparent}}
+.ar{font-family:var(--f-ar);color:var(--ink-2);font-size:.95rem}
+.name{font-size:var(--step-4);font-weight:800;letter-spacing:-.035em}
+.name .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.name .ln span{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.name .ln:nth-child(2) span{animation-delay:.12s;color:var(--sea)}
+@keyframes rise{from{transform:translateY(105%)}}
+.role{margin-top:18px;font-size:var(--step-1);max-width:34ch;color:var(--ink-2)}
+.role strong{color:var(--ink);font-weight:600}
+.typed{font-family:var(--f-mono);font-size:.95rem;margin-top:18px;color:var(--ink);min-height:1.6em}
+.typed .k{color:var(--sea)}
+.typed .caret{display:inline-block;width:.55em;height:1.05em;background:var(--sand);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:600;font-size:.94rem;text-decoration:none;border:1px solid var(--ink);cursor:pointer;font-family:var(--f-body);transition:transform .25s cubic-bezier(.2,.8,.2,1),background .2s,color .2s}
+.btn.solid{background:var(--ink);color:var(--ground)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost:hover{background:var(--ink);color:var(--ground)}
+.btn svg{width:16px;height:16px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.stat{padding:16px 14px 0 0}
+.stat+.stat{padding-left:14px;border-left:1px solid var(--line)}
+.stat .n{font-family:var(--f-display);font-weight:800;font-size:var(--step-3);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat .t{font-size:.8rem;color:var(--ink-2);line-height:1.35}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0;padding-left:0}}
+
+/* portrait framed as a detection */
+.portrait{position:relative;justify-self:center;width:min(100%,400px)}
+.frame{position:relative;aspect-ratio:912/1172;border-radius:22px;overflow:hidden;background:var(--panel);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .35s ease-out;box-shadow:0 30px 60px -30px color-mix(in srgb,var(--ink) 45%,transparent)}
+.frame img{width:100%;height:100%;object-fit:cover;display:block;max-width:100%;animation:focus 1.4s ease-out both}
+@keyframes focus{from{filter:blur(10px) saturate(.3);transform:scale(1.08)}}
+.scan{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,transparent 0,color-mix(in srgb,var(--sea) 0%,transparent) 40%,color-mix(in srgb,#5BC3C9 38%,transparent) 50%,transparent 52%);background-size:100% 220%;animation:scan 3.4s 1 .3s ease-in-out both;mix-blend-mode:screen}
+@keyframes scan{from{background-position:0 120%}to{background-position:0 -120%}}
+.bbox{position:absolute;left:21%;top:12%;width:57%;height:52%;pointer-events:none}
+.bbox::before,.bbox::after,.bbox i::before,.bbox i::after{content:"";position:absolute;width:22px;height:22px;border:2px solid #5BC3C9;animation:snap .9s 1.3s cubic-bezier(.2,.8,.2,1) both}
+.bbox::before{left:0;top:0;border-right:0;border-bottom:0}
+.bbox::after{right:0;top:0;border-left:0;border-bottom:0}
+.bbox i::before{left:0;bottom:0;border-right:0;border-top:0}
+.bbox i::after{right:0;bottom:0;border-left:0;border-top:0}
+@keyframes snap{from{opacity:0;transform:scale(2.2)}}
+.bbox span{position:absolute;left:0;top:-26px;font-family:var(--f-mono);font-size:.7rem;background:#5BC3C9;color:#0D1513;padding:3px 7px;border-radius:4px;white-space:nowrap;animation:fadeup .5s 2s both}
+@keyframes fadeup{from{opacity:0;transform:translateY(6px)}}
+.tag{position:absolute;font-family:var(--f-mono);font-size:.72rem;background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:6px 10px;border-radius:10px;box-shadow:0 10px 24px -14px color-mix(in srgb,var(--ink) 50%,transparent);animation:float 6s ease-in-out infinite}
+.tag.a{left:-18px;bottom:22%;animation-delay:-2s}
+.tag.b{right:-14px;bottom:7%}
+.tag em{font-style:normal;color:var(--sea)}
+@keyframes float{50%{transform:translateY(-8px)}}
+@media (max-width:520px){.tag.a{left:6px}.tag.b{right:6px}}
+
+/* ---------- sections ---------- */
+section{padding-block:clamp(56px,8vw,104px)}
+.head{display:grid;grid-template-columns:200px 1fr;gap:24px;margin-bottom:40px;align-items:end}
+.head h2{font-size:var(--step-3);font-weight:800;letter-spacing:-.025em}
+.head p{color:var(--ink-2);max-width:62ch;margin-top:10px}
+@media (max-width:720px){.head{grid-template-columns:1fr;gap:8px}}
+.rule{border-top:1px solid var(--line)}
+
+/* about */
+.about{display:grid;grid-template-columns:200px 1fr;gap:24px}
+.about .lede{font-family:var(--f-display);font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:600;line-height:1.25;letter-spacing:-.015em;max-width:30ch}
+.about .lede mark{background:linear-gradient(transparent 62%,color-mix(in srgb,var(--sand) 38%,transparent) 0);color:inherit;padding:0 2px}
+.about .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px;color:var(--ink-2);max-width:880px}
+@media (max-width:720px){.about,.about .cols{grid-template-columns:1fr}}
+
+/* landscape signature */
+.lab{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.lab-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 20px;border-bottom:1px solid var(--line)}
+.lab-top .ttl{font-family:var(--f-display);font-weight:600;font-size:1.05rem}
+.legend{display:flex;gap:14px;flex-wrap:wrap}
+.legend button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:.76rem;padding:4px 8px;border-radius:6px;color:var(--ink)}
+.legend button[aria-pressed="false"]{opacity:.38}
+.legend button:focus-visible{outline:2px solid var(--sea)}
+.legend i{width:10px;height:10px;border-radius:50%}
+.lab-body{position:relative}
+#field{display:block;width:100%;height:clamp(300px,42vw,460px);cursor:crosshair;touch-action:manipulation}
+.readout{position:absolute;right:14px;top:14px;background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-family:var(--f-mono);font-size:.74rem;min-width:180px;backdrop-filter:blur(6px)}
+.readout div{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}
+.readout .h{color:var(--ink-2);margin-bottom:4px}
+.hint{position:absolute;left:14px;bottom:12px;font-family:var(--f-mono);font-size:.72rem;color:var(--ink-2);background:color-mix(in srgb,var(--panel) 80%,transparent);padding:4px 8px;border-radius:6px}
+@media (max-width:560px){.readout{position:static;margin:12px;}}
+
+/* timeline */
+.ledger{display:grid;gap:0}
+.row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding-block:26px;border-top:1px solid var(--line);position:relative}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row .when{font-family:var(--f-mono);font-size:.82rem;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:4px}
+.row h3{font-size:var(--step-1);font-weight:600;letter-spacing:-.01em}
+.row .org{color:var(--sea);font-weight:500;margin-top:2px}
+.row ul{margin:10px 0 0;padding-left:18px;color:var(--ink-2);max-width:70ch}
+.row li+li{margin-top:4px}
+.row::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:var(--sea);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.row:hover::before{width:100%}
+.kind{display:inline-block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);margin-left:8px;vertical-align:3px}
+@media (max-width:720px){.row{grid-template-columns:1fr;gap:6px}}
+
+/* work */
+.feature{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel);margin-bottom:20px}
+.feature .copy{padding:clamp(22px,4vw,40px);display:flex;flex-direction:column;gap:14px;min-width:0}
+.feature h3{font-size:var(--step-3);font-weight:800;letter-spacing:-.03em}
+.feature p{color:var(--ink-2)}
+.feature .viz{position:relative;background:var(--sea-soft);min-height:300px;overflow:hidden}
+#wound{position:absolute;inset:0;width:100%;height:100%}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--f-mono);font-size:.72rem;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--ground)}
+@media (max-width:820px){.feature{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:580px){.grid{grid-template-columns:1fr}}
+.card{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--panel);display:flex;flex-direction:column;gap:10px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s;min-width:0}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(260px circle at var(--mx,-200px) var(--my,-200px),color-mix(in srgb,var(--sea) 14%,transparent),transparent 70%);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--sea) 45%,var(--line))}
+.card:hover::after{opacity:1}
+.card .yr{font-family:var(--f-mono);font-size:.74rem;color:var(--sand)}
+.card h3{font-size:1.18rem;font-weight:600;letter-spacing:-.01em}
+.card p{color:var(--ink-2);font-size:.94rem}
+.card .chips{margin-top:auto;padding-top:6px}
+.lnk{display:inline-flex;align-items:center;gap:6px;color:var(--sea);font-weight:600;text-decoration:none;border-bottom:1px solid transparent;width:fit-content}
+.lnk:hover{border-color:var(--sea)}
+
+/* research */
+.pubs{display:grid;gap:16px}
+.pub{display:grid;grid-template-columns:1fr 280px;gap:28px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:clamp(20px,3.4vw,32px)}
+.pub .venue{font-family:var(--f-mono);font-size:.76rem;color:var(--sand);letter-spacing:.04em}
+.pub h3{font-size:clamp(1.15rem,2vw,1.45rem);font-weight:600;margin:8px 0 8px;letter-spacing:-.01em}
+.pub .auth{font-size:.9rem;color:var(--ink-2)}
+.pub .auth b{color:var(--ink);font-weight:600}
+.pub p.sum{margin-top:12px;color:var(--ink-2);max-width:62ch}
+@media (max-width:820px){.pub{grid-template-columns:1fr}}
+.meter{display:grid;gap:14px;align-content:center}
+.meter .m{display:grid;gap:6px}
+.meter .m .top2{display:flex;justify-content:space-between;font-size:.82rem}
+.meter .m .top2 b{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:inherit;background:var(--sea);width:var(--w);transform-origin:0 50%;animation:grow 1.4s cubic-bezier(.2,.8,.2,1) both}
+.bar.s i{background:var(--sand)}
+@keyframes grow{from{transform:scaleX(0)}}
+.meter small{font-size:.74rem;color:var(--ink-2)}
+.diagram{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.72rem}
+.diagram span{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--ground);position:relative}
+.diagram span.on{border-color:var(--sea);color:var(--sea)}
+.diagram em{font-style:normal;color:var(--ink-2)}
+.interests{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.interests span{font-size:.92rem;padding:8px 14px;border-radius:999px;background:var(--sea-soft);color:var(--ink)}
+
+.wip-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:48px 0 16px}
+.wip-head h3{font-size:var(--step-2);font-weight:800;letter-spacing:-.02em}
+.wip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.wip{grid-template-columns:1fr}}
+.wip .card{gap:12px}
+.state{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.state i{width:8px;height:8px;border-radius:50%;background:var(--sand);animation:ping2 2s infinite}
+@keyframes ping2{50%{opacity:.35}}
+.field-tag{font-family:var(--f-mono);font-size:.72rem;color:var(--sea)}
+.steps{display:flex;gap:4px;margin-top:4px}
+.steps b{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.steps b.on{background:var(--sea)}
+.steps-l{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.64rem;color:var(--ink-2)}
+.trial{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.74rem;padding:5px 10px;border-radius:8px;background:var(--sea-soft);color:var(--ink);width:fit-content;text-decoration:none}
+.trial b{color:var(--sea)}
+
+/* skills marquee + matrix */
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding-block:18px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:40px;width:max-content;animation:slide 48s linear infinite}
+.track.rev{animation-direction:reverse;margin-top:14px}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font-family:var(--f-display);font-size:clamp(1.3rem,3vw,2rem);font-weight:600;letter-spacing:-.02em;white-space:nowrap;color:var(--ink)}
+.track span:nth-child(3n+2){color:var(--sea)}
+.track span:nth-child(5n){color:transparent;-webkit-text-stroke:1px var(--ink-2)}
+@keyframes slide{to{transform:translateX(-50%)}}
+.matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+@media (max-width:900px){.matrix{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.matrix{grid-template-columns:1fr}}
+.skill h3{font-size:1rem;font-weight:600;font-family:var(--f-body);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.skill h3 i{width:8px;height:8px;border-radius:2px;background:var(--sea)}
+.skill ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:.93rem;color:var(--ink-2)}
+.skill li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.skill li small{font-family:var(--f-mono);font-size:.68rem;color:var(--ink-2);opacity:.8}
+
+/* teaching */
+.teach{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.teach{grid-template-columns:1fr}}
+.courses{display:flex;flex-wrap:wrap;gap:8px}
+.courses span{padding:8px 13px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:.92rem;transition:background .2s,color .2s,border-color .2s}
+.courses span:hover{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.box{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--panel)}
+.box h3{font-size:1.05rem;font-family:var(--f-body);font-weight:600;margin-bottom:10px}
+.box p,.box li{color:var(--ink-2);font-size:.95rem}
+.box ul{margin:0;padding-left:18px;display:grid;gap:8px}
+
+/* contact */
+.contact{background:var(--deep);color:var(--on-deep);border-radius:28px;padding:clamp(28px,6vw,64px);position:relative;overflow:hidden}
+.contact h2{font-size:clamp(2rem,5.4vw,4rem);font-weight:800;letter-spacing:-.035em;max-width:16ch}
+.contact h2 span{color:var(--deep-accent)}
+.contact p{max-width:52ch;margin-top:14px;opacity:.8}
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px;position:relative;z-index:1}
+@media (max-width:760px){.ways{grid-template-columns:1fr}}
+.way{border:1px solid var(--deep-line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.way .label{color:color-mix(in srgb,var(--on-deep) 62%,transparent)}
+.way .v{font-family:var(--f-mono);font-size:.92rem;word-break:break-all;user-select:all}
+.way button,.way a.go{all:unset;cursor:pointer;font-size:.84rem;font-weight:600;color:var(--deep-accent);text-decoration:underline;text-underline-offset:3px;width:fit-content}
+.way button:focus-visible,.way a.go:focus-visible{outline:2px solid var(--deep-accent)}
+#orbit{position:absolute;right:-60px;top:-60px;width:360px;height:360px;opacity:.5;pointer-events:none}
+footer{padding-block:28px 40px;color:var(--ink-2);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* reveal: content is visible at rest; only items below the fold get a pre-state */
+.pre{opacity:.001;transform:translateY(26px)}
+.rv{transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .pre{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top"><i>IKS</i><span>Ibrahim Shehada</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#research">Research</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="keep">Contact</a>
+    </nav>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main id="top">
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hello">
+        <span class="status"><b></b>Open to PhD &amp; research positions</span>
+        <span class="ar" lang="ar" dir="rtl">إبراهيم خليل شحادة</span>
+      </div>
+      <h1 class="name"><span class="ln"><span>Ibrahim Khalil</span></span><span class="ln"><span>Shehada</span></span></h1>
+      <p class="role"><strong>Computer engineer, university lecturer and ML researcher</strong> building computer-vision tools that clinicians can trust.</p>
+      <p class="typed" aria-live="off"><span class="k">&gt;</span> <span id="typed">model.fit(evidence, not_just_code)</span><span class="caret"></span></p>
+      <div class="cta">
+        <a class="btn solid" href="#contact">Get in touch
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn ghost" href="#work">See my work</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n" data-to="5000" data-suffix="+">5000+</div><div class="t">students taught</div></div>
+        <div class="stat"><div class="n" data-to="10">10</div><div class="t">academic semesters</div></div>
+        <div class="stat"><div class="n" data-to="6">6</div><div class="t">production apps shipped</div></div>
+        <div class="stat"><div class="n" data-to="5">5</div><div class="t">papers published or in progress</div></div>
+      </div>
+    </div>
+    <div class="portrait">
+      <div class="frame" id="frame">
+        <img src="photo.jpg" alt="Portrait of Ibrahim Khalil Shehada in a dark suit and blue tie" width="640" height="822">
+        <div class="scan"></div>
+        <div class="bbox"><i></i><span>person · lecturer · 0.99</span></div>
+      </div>
+      <div class="tag a">📍 Gaza, Palestine</div>
+      <div class="tag b"><em>Python</em> · <em>PyTorch</em> · <em>Flutter</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="rule">
+  <div class="wrap about">
+    <div class="label">About</div>
+    <div>
+      <p class="lede rv">I build systems that read medical images carefully, and I want to know <mark>exactly when they should not be trusted.</mark></p>
+      <div class="cols rv">
+        <p>I'm a Computer Engineer (Islamic University of Gaza, 2020) and have spent more than four years as a lecturer at Al-Aqsa University's Faculty of IT, teaching Machine Learning, Data Science, Pattern Recognition and Mobile Programming. Across university courses and training programmes I have taught more than 5,000 students.</p>
+        <p>Alongside teaching I ship software. Since 2021 I've delivered six production applications in healthcare, education and digital payments, including <strong>DiaFootCare</strong>, an AI wound-monitoring app that is now the intervention in a registered clinical trial. I'm completing an M.Sc. in Information Technology at the Islamic University of Gaza and preparing for doctoral research in medical computer vision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SIGNATURE: LOSS LANDSCAPE ================= -->
+<section id="lab" class="rule" style="padding-top:clamp(40px,6vw,72px)">
+  <div class="wrap">
+    <div class="head">
+      <div class="label">From my research</div>
+      <div>
+        <h2>Four optimizers, one valley.</h2>
+        <p>My first paper benchmarked seven deep-learning optimizers. Its lesson: no optimizer wins everywhere. Below, four of them race down the same loss surface live. Click or tap anywhere on the surface to drop a new starting point.</p>
+      </div>
+    </div>
+    <div class="lab rv">
+      <div class="lab-top">
+        <span class="ttl">Loss surface · f(x, y) with a curved valley</span>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="lab-body">
+        <canvas id="field" aria-label="Animated contour map showing SGD, Momentum, Adam and Lion optimizers descending a loss surface"></canvas>
+        <div class="readout" id="readout"></div>
+        <span class="hint">Click to restart · illustration, not paper results</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience" class="rule">
+  <div class="wrap">
+    <div class="head">
+      <div class="label">Experience</div>
+      <div><h2>Teaching, building, researching.</h2><p>Most recent first.</p></div>
+    </div>
+    <div class="ledger">
+      <article class="row rv">
+        <div class="when">2022 – present</div>
+        <div><h3>M.Sc. Information Technology <span class="kind">Study</span></h3><div class="org">Islamic University of Gaza</div>
+          <ul><li>All 30 credit hours of coursework completed; thesis plan approved in October 2026.</li>
+          <li>Thesis: <em>From Prediction to Intervention: An Explainable AI-Based Early Warning System for Student Dropout Detection</em>, supervised by Prof. Iyad Alshami. Covers leakage-aware validation, SHAP and counterfactual explanations, and fairness-aware threshold calibration.</li></ul></div>
+      </article>
+      <article class="row rv">
+        <div class="when">Feb 2022 – Apr 2026</div>
+        <div><h3>Lecturer / Teaching Assistant <span class="kind">Academia</span></h3><div class="org">Al-Aqsa University · Faculty of IT, Gaza</div>
+          <ul><li>Designed and taught Machine Learning, Data Science, Pattern Recognition, Mobile and Cross-Platform Programming, UX/UI Design, IT Project Management and Java.</li>
+          <li>Built course materials, supervised applied student projects and assessed outcomes against defined milestones.</li>
+          <li>Mentored students on technical and research work, with strong student-evaluation results.</li></ul></div>
+      </article>
+      <article class="row rv">
+        <div class="when">2021 – 2026</div>
+        <div><h3>Freelance Flutter &amp; AI Developer <span class="kind">Industry</span></h3><div class="org">Self-employed</div>
+          <ul><li>Delivered six cross-platform mobile and web applications in healthcare, education and payments, from design to App Store release.</li>
+          <li>Developer and technical lead of DiaFootCare, the app used in clinical trial NCT07815275 (Oman Ministry of Health).</li></ul></div>
+      </article>
+      <article class="row rv">
+        <div class="when">Feb 2023 – Apr 2026</div>
+        <div><h3>Programming Instructor / Trainer <span class="kind">Training</span></h3><div class="org">Kick-Lance · Mostaqel · Nawa · Bidaya</div>
+          <ul><li>Taught Python, data analysis and web development against measurable learning outcomes; supervised capstone projects.</li></ul></div>
+      </article>
+      <article class="row rv">
+        <div class="when">Feb 2023 – Aug 2023</div>
+        <div><h3>Teaching Assistant <span class="kind">Academia</span></h3><div class="org">University of Palestine, Gaza</div>
+          <ul><li>Supported delivery and assessment of computing courses and reported on student performance.</li></ul></div>
+      </article>
+      <article class="row rv">
+        <div class="when">Dec 2021 – Feb 2022</div>
+        <div><h3>Flutter Application Developer <span class="kind">Industry</span></h3><div class="org">Hexa IT Company, Gaza</div>
+          <ul><li>Built cross-platform mobile applications following software-engineering best practice.</li></ul></div>
+      </article>
+      <article class="row rv">
+        <div class="when">Sep 2015 – Aug 2020</div>
+        <div><h3>B.Sc. Computer Engineering <span class="kind">Study</span></h3><div class="org">Islamic University of Gaza</div>
+          <ul><li>Artificial Intelligence, Data Structures &amp; Algorithms, Probability &amp; Statistics, Software Engineering, Operating Systems.</li>
+          <li>Graduation project: G Store, an e-commerce platform helping Gaza's small artisans sell their work.</li></ul></div>
+      </article>
+      <article class="row rv">
+        <div class="when">Jun 2019 – Aug 2019</div>
+        <div><h3>Front-End Development Intern <span class="kind">Industry</span></h3><div class="org">Swift Tech, Gaza</div>
+          <ul><li>Built responsive pages with HTML, CSS, JavaScript and Bootstrap, reviewed by senior developers.</li></ul></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section id="work" class="rule">
+  <div class="wrap">
+    <div class="head">
+      <div class="label">Selected work</div>
+      <div><h2>Software that solves real problems.</h2><p>Built for real users under real constraints: unstable power, weak connectivity, and people who need the thing to simply work.</p></div>
+    </div>
+
+    <article class="feature rv">
+      <div class="copy">
+        <span class="label" style="color:var(--sand)">Featured · 2026 · Health AI · Technical lead</span>
+        <h3>DiaFootCare</h3>
+        <p>An iOS app, published on the App Store, that monitors diabetic foot wounds from phone photographs. It tracks healing over time and uses computer vision to identify tissue types and estimate wound size, with a calibration reference in the frame that turns pixels into real millimetres.</p>
+        <p>Under the hood: a U-Net with a MobileNetV2 encoder and attention for segmentation, a CLIP ViT-B/32 encoder with SVM heads for five tissue classes, and fp16 TFLite models that run offline on the phone. The calibration-ring detector is classical computer vision, kept analytic so clinicians can audit every measurement.</p>
+        <a class="trial" href="https://clinicaltrials.gov/study/NCT07815275" target="_blank" rel="noopener"><b>●</b> Clinical trial NCT07815275 · Oman MoH · 139 participants ↗</a>
+        <div class="chips"><span class="chip">Flutter</span><span class="chip">TensorFlow · TFLite</span><span class="chip">U-Net</span><span class="chip">CLIP</span><span class="chip">Laravel API</span></div>
+        <a class="lnk" href="https://diafootcare.tech" target="_blank" rel="noopener">diafootcare.tech ↗</a>
+      </div>
+      <div class="viz"><canvas id="wound" aria-label="Animated illustration of wound segmentation with tissue classes and a measurement"></canvas></div>
+    </article>
+
+    <div class="grid">
+      <article class="card rv"><span class="yr">2025 · EdTech + ML</span><h3>Smart Learning &amp; IQ Improvement</h3><p>Analyses each student's performance and uses machine learning to generate personalised questions that target weak areas.</p><div class="chips"><span class="chip">ML</span><span class="chip">Flutter</span></div></article>
+      <article class="card rv"><span class="yr">2024 · EdTech</span><h3>Teacher Learning Platform</h3><p>Secure lecture-video platform with download protection, attendance tracking and personalised learning management.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">LMS</span></div></article>
+      <article class="card rv"><span class="yr">2022–2024 · Research</span><h3>Evolutionary Timetable Scheduler</h3><p>A hybrid (1+1) evolution strategy with shotgun hill-climbing that produces near-optimal, conflict-reduced faculty timetables at Al-Aqsa University.</p><div class="chips"><span class="chip">Optimisation</span><span class="chip">Flutter Web</span></div></article>
+      <article class="card rv"><span class="yr">2023 · FinTech</span><h3>Bitaqati: Driver Card System</h3><p>Digital card payments built with local authorities to solve Gaza's cash-change shortage on public transport.</p><div class="chips"><span class="chip">Payments</span><span class="chip">Flutter</span></div></article>
+      <article class="card rv"><span class="yr">2023–2024 · Team lead</span><h3>Volunteer-Work Department App</h3><p>Led a three-person team on a Flutter front-end and ASP.NET API that runs the university's volunteer operations. Delivered on schedule.</p><div class="chips"><span class="chip">ASP.NET</span><span class="chip">Flutter</span></div></article>
+      <article class="card rv"><span class="yr">2022–2023 · Commerce</span><h3>Delivery &amp; E-commerce</h3><p>A driver-to-customer delivery manager and a local online marketplace for browsing and buying products.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">Firebase</span></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESEARCH ================= -->
+<section id="research" class="rule">
+  <div class="wrap">
+    <div class="head">
+      <div class="label">Research</div>
+      <div><h2>Optimisation and honest evaluation.</h2><p>My research asks when a learning system works, on which data, and where it fails. Two papers are out and three more are being written, in diabetes care and in genomics.</p></div>
+    </div>
+    <div class="pubs">
+      <article class="pub rv">
+        <div>
+          <div class="venue">IJISRT · Vol. 10, No. 8 · Aug 2025 · Peer-reviewed</div>
+          <h3>Comparative Study of Deep Learning Optimizers: SGD, Momentum SGD, RMSProp, AMSGrad, Adam, Yogi, and Lion</h3>
+          <div class="auth"><b>I. K. Shehada</b>, R. R. Atallah, A. Y. Maghari · First author</div>
+          <p class="sum">Benchmarked seven optimizers on MNIST and CIFAR-10 across training and test accuracy, loss and learning-rate sensitivity. The best optimizer changed with the dataset, so optimizer and learning rate must be tuned to the data.</p>
+          <a class="lnk" style="margin-top:12px" href="https://www.ijisrt.com/" target="_blank" rel="noopener">IJISRT25AUG007 ↗</a>
+        </div>
+        <div class="meter">
+          <div class="m"><div class="top2"><span>MNIST · SGD</span><b>99.14%</b></div><div class="bar"><i style="--w:99.14%"></i></div></div>
+          <div class="m"><div class="top2"><span>CIFAR-10 · Momentum SGD</span><b>72.94%</b></div><div class="bar s"><i style="--w:72.94%"></i></div></div>
+          <small>Best test accuracy per dataset</small>
+        </div>
+      </article>
+      <article class="pub rv">
+        <div>
+          <div class="venue">Zenodo · Sep 2026 · Preprint</div>
+          <h3>A Multi-Agent LLM System for Autonomous Detection, Diagnosis and Repair of Micro-Frontend Integration Failures</h3>
+          <div class="auth"><b>I. K. Shehada</b>, L. F. Samhan, B. H. Lubbad · First author</div>
+          <p class="sum">LLM agents that watch a micro-frontend system, find integration failures, explain their cause and propose repairs, so the system can monitor its own reliability.</p>
+          <a class="lnk" style="margin-top:12px" href="https://doi.org/10.5281/zenodo.22677057" target="_blank" rel="noopener">DOI 10.5281/zenodo.22677057 ↗</a>
+        </div>
+        <div class="diagram" aria-hidden="true">
+          <span data-s="0">Detect</span><em>→</em><span data-s="1">Diagnose</span><em>→</em><span data-s="2">Repair</span><em>→</em><span data-s="3">Verify</span>
+        </div>
+      </article>
+    </div>
+    <div class="wip-head"><h3>In preparation</h3><span class="label">3 manuscripts · 2026–2027</span></div>
+    <div class="wip">
+      <article class="card rv">
+        <span class="state"><i></i>Writing · data collection under way</span>
+        <span class="field-tag">Diabetes · Clinical AI</span>
+        <h3>DiaFootCare: an offline smartphone AI system for monitoring diabetic foot ulcers in a clinical trial</h3>
+        <p>System and methods paper for the app behind trial NCT07815275: wound segmentation, tissue classification, calibrated size measurement and healing tracking on ordinary phones. Co-authored with the trial team; I lead the technical work and methodology.</p>
+        <div><div class="steps"><b class="on"></b><b class="on"></b><b class="on"></b><b></b><b></b></div><div class="steps-l"><span>idea</span><span>method</span><span>data</span><span>results</span><span>submit</span></div></div>
+      </article>
+      <article class="card rv">
+        <span class="state"><i></i>Experiments in progress</span>
+        <span class="field-tag">Diabetes · Medical imaging</span>
+        <h3>Do diabetic foot ulcer segmentation models survive the smartphone? Robustness and calibration under domain shift</h3>
+        <p>Measures how much segmentation accuracy is lost when models trained on clinical photos meet smartphone images taken by non-specialists, and whether optimizer choice changes robustness and calibration, not only accuracy.</p>
+        <div><div class="steps"><b class="on"></b><b class="on"></b><b></b><b></b><b></b></div><div class="steps-l"><span>idea</span><span>method</span><span>data</span><span>results</span><span>submit</span></div></div>
+      </article>
+      <article class="card rv">
+        <span class="state"><i></i>Literature &amp; method design</span>
+        <span class="field-tag">Genomics · Algorithms</span>
+        <h3>Explainable machine learning for cancer gene dependencies from gene-expression data</h3>
+        <p>Uses RNA-seq expression and CRISPR dependency data (DepMap, TCGA) to predict which genes a tumour depends on, comparing classical and deep models and explaining predictions through pathways such as DNA-damage repair.</p>
+        <div><div class="steps"><b class="on"></b><b></b><b></b><b></b><b></b></div><div class="steps-l"><span>idea</span><span>method</span><span>data</span><span>results</span><span>submit</span></div></div>
+      </article>
+    </div>
+    <div class="interests rv" aria-label="Research interests">
+      <span>Computer vision for healthcare</span><span>Medical image segmentation</span><span>Uncertainty &amp; model reliability</span><span>Deep learning optimisation</span><span>Predictive analytics</span><span>Bioinformatics &amp; genomics</span><span>Explainable AI &amp; fairness</span><span>LLM agents</span><span>Decision-support systems</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="rule">
+  <div class="wrap">
+    <div class="head">
+      <div class="label">Toolkit</div>
+      <div><h2>What I work with.</h2></div>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="track" id="t1"></div>
+    <div class="track rev" id="t2"></div>
+  </div>
+  <div class="wrap">
+    <div class="matrix">
+      <div class="skill rv"><h3><i></i>Machine learning &amp; AI</h3><ul>
+        <li>Deep learning <small>CNN · training</small></li><li>Computer vision <small>OpenCV · segmentation</small></li><li>NLP &amp; LLMs <small>agents · RAG</small></li><li>Classical ML <small>scikit-learn</small></li><li>Optimisation <small>evolutionary · gradient</small></li><li>Model evaluation <small>Dice · IoU · calibration</small></li><li>Explainable AI <small>SHAP · counterfactuals</small></li></ul></div>
+      <div class="skill rv"><h3><i></i>Data science</h3><ul>
+        <li>Python <small>primary</small></li><li>Pandas · NumPy</li><li>Matplotlib · Seaborn</li><li>SQL</li><li>Statistics &amp; experiment design</li><li>Bioinformatics data <small>RNA-seq · DepMap</small></li></ul></div>
+      <div class="skill rv"><h3><i></i>Frameworks</h3><ul>
+        <li>PyTorch</li><li>TensorFlow · Keras</li><li>Hugging Face</li><li>NLTK</li><li>Django · FastAPI</li><li>ASP.NET</li></ul></div>
+      <div class="skill rv"><h3><i></i>Product &amp; engineering</h3><ul>
+        <li>Flutter · Dart <small>5+ yrs</small></li><li>iOS &amp; Android release</li><li>Firebase · Laravel · REST APIs</li><li>HTML · CSS · JavaScript</li><li>UX/UI · Figma</li><li>Git · Docker · Linux</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEACHING & BEYOND ================= -->
+<section id="teaching" class="rule">
+  <div class="wrap">
+    <div class="head">
+      <div class="label">Teaching &amp; beyond</div>
+      <div><h2>Explaining clearly is part of the job.</h2><p>Courses I have designed and taught at university level.</p></div>
+    </div>
+    <div class="courses rv">
+      <span>Machine Learning</span><span>Data Science</span><span>Pattern Recognition</span><span>Mobile Application Programming</span><span>Cross-Platform Programming</span><span>UX/UI Design</span><span>IT Project Management</span><span>Java Programming</span><span>Python for Data Analysis</span><span>Web Development</span>
+    </div>
+    <div class="teach" style="margin-top:24px">
+      <div class="box rv"><h3>Volunteering</h3><ul>
+        <li><strong>Emergency water distribution, Gaza</strong> (Feb–Aug 2024). Planned, monitored and reported water distribution across three neighbourhoods under emergency conditions.</li>
+        <li><strong>Career-guidance speaker</strong> (2022–2026). Sessions for students on programming, design and freelancing.</li></ul></div>
+      <div class="box rv"><h3>Languages &amp; interests</h3><ul>
+        <li><strong>Arabic</strong> native · <strong>English</strong> professional working proficiency · <strong>German</strong> learning</li>
+        <li>Health informatics and AI that helps clinicians in low-resource settings</li>
+        <li>Mentoring students into research and freelancing</li>
+        <li>Product design and clean, usable interfaces</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact rv">
+      <canvas id="orbit" aria-hidden="true"></canvas>
+      <div class="label" style="color:color-mix(in srgb,var(--on-deep) 62%,transparent)">Contact</div>
+      <h2>Let's build something <span>clinicians can trust.</span></h2>
+      <p>Open to research positions, supervision, collaborations and teaching. Email is the fastest way to reach me.</p>
+      <div class="ways">
+        <div class="way"><span class="label">Email</span><span class="v" id="email">ish002197@gmail.com</span><button type="button" data-copy="email">Copy email</button></div>
+        <div class="way"><span class="label">Phone / WhatsApp</span><span class="v" id="phone">+972 59 283 3136</span><button type="button" data-copy="phone">Copy number</button></div>
+        <div class="way"><span class="label">Elsewhere</span><span class="v">LinkedIn · DiaFootCare</span>
+          <a class="go" href="https://www.linkedin.com/search/results/all/?keywords=Ibrahim%20Khalil%20Shehada" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="go" href="https://diafootcare.tech" target="_blank" rel="noopener">diafootcare.tech ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Ibrahim Khalil Shehada · Gaza, Palestine</span><span class="mono">Built with care, tested on real users.</span></div></footer>
+
+<script>
+(()=>{
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* scroll progress + active nav */
+const prog=document.getElementById('progress');
+const links=[...document.querySelectorAll('.nav a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+function onScroll(){
+  const h=document.documentElement; const p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
+  prog.style.transform=`scaleX(${p})`;
+  let cur=-1; secs.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top<innerHeight*.4) cur=i; });
+  links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+/* reveal (only for items that start below the fold) */
+if(!reduce && 'IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target);} }),{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach((el,i)=>{
+    if(el.getBoundingClientRect().top>innerHeight){ el.classList.add('pre'); el.style.transitionDelay=(i%3)*70+'ms'; io.observe(el); }
+  });
+}
+
+/* counters */
+if(!reduce) document.querySelectorAll('[data-to]').forEach(el=>{
+  const to=+el.dataset.to, suf=el.dataset.suffix||''; const t0=performance.now(), d=1600;
+  (function f(t){ const k=Math.min(1,(t-t0)/d), e=1-Math.pow(1-k,4); el.textContent=Math.round(to*e).toLocaleString('en-US')+suf; if(k<1) requestAnimationFrame(f); })(t0);
+});
+
+/* typed line */
+const lines=['model.fit(evidence, not_just_code)','segment(wound_photo) → tissue + mm²','optimizer = tuned_for(dataset)','teach(students=5000, semesters=10)','ship(app, users="real")'];
+const ty=document.getElementById('typed');
+if(!reduce){ let li=0,ci=lines[0].length,del=true;
+  setTimeout(function step(){
+    const s=lines[li];
+    if(del){ ci--; ty.textContent=s.slice(0,ci); if(ci===0){del=false; li=(li+1)%lines.length;} setTimeout(step,28); }
+    else { const n=lines[li]; ci++; ty.textContent=n.slice(0,ci); if(ci===n.length){del=true; setTimeout(step,2400);} else setTimeout(step,55+Math.random()*50); }
+  },3200);
+}
+
+/* portrait tilt */
+const fr=document.getElementById('frame');
+if(!reduce && matchMedia('(hover:hover)').matches){
+  fr.addEventListener('pointermove',e=>{const r=fr.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;fr.style.setProperty('--ry',(x*10)+'deg');fr.style.setProperty('--rx',(-y*10)+'deg');});
+  fr.addEventListener('pointerleave',()=>{fr.style.setProperty('--ry','0deg');fr.style.setProperty('--rx','0deg');});
+}
+
+/* card spotlight */
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');}));
+
+/* marquee */
+const A=['Python','PyTorch','Computer Vision','Flutter','TensorFlow','scikit-learn','Pandas','LLM Agents','Segmentation','NumPy','Dart','Hugging Face'];
+const B=['Deep Learning','Explainable AI','OpenCV','TFLite','U-Net','SQL','Genomics','UX/UI','Keras','SHAP','Optimisation','Git'];
+const fill=(id,arr)=>{document.getElementById(id).innerHTML=[...arr,...arr].map(s=>`<span>${s}</span>`).join('<span aria-hidden="true" style="color:var(--sand)">✦</span>');};
+fill('t1',A); fill('t2',B);
+
+/* copy buttons */
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.copy), txt=el.textContent.trim(), orig=b.textContent;
+  const done=m=>{b.textContent=m; setTimeout(()=>b.textContent=orig,1800);};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);done('Selected — press Ctrl+C');};
+  try{ navigator.clipboard.writeText(txt).then(()=>done('Copied'),sel);}catch(_){sel();}
+}));
+
+/* research diagram pulse */
+const ds=[...document.querySelectorAll('.diagram span')]; let di=0;
+if(!reduce) setInterval(()=>{ds.forEach((d,i)=>d.classList.toggle('on',i===di)); di=(di+1)%ds.length;},900); else ds.forEach(d=>d.classList.add('on'));
+
+/* ============ LOSS LANDSCAPE ============ */
+const cv=document.getElementById('field'), ctx=cv.getContext('2d');
+const X0=-6,X1=6,Y0=-3.2,Y1=3.2;
+const f=(x,y)=>{const v=y-0.9*Math.sin(x*0.7);return 0.06*x*x+1.1*v*v+0.25*(1-Math.cos(1.6*x))*0.4;};
+const grad=(x,y)=>{const v=y-0.9*Math.sin(x*0.7);return[0.12*x+2.2*v*(-0.63*Math.cos(x*0.7))+0.16*Math.sin(1.6*x),2.2*v];};
+const OPT=[
+  {id:'SGD',c:'--sand',lr:0.06,on:true},
+  {id:'Momentum',c:'--rose',lr:0.012,on:true},
+  {id:'Adam',c:'--sea',lr:0.06,on:true},
+  {id:'Lion',c:'--violet',lr:0.025,on:true},
+];
+const lg=document.getElementById('legend');
+OPT.forEach(o=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed','true');b.innerHTML=`<i style="background:var(${o.c})"></i>${o.id}`;b.onclick=()=>{o.on=!o.on;b.setAttribute('aria-pressed',o.on);};lg.appendChild(b);});
+let W,H,bg,dpr;
+function toPx(x,y){return[(x-X0)/(X1-X0)*W,(1-(y-Y0)/(Y1-Y0))*H];}
+function toW(px,py){return[X0+px/W*(X1-X0),Y0+(1-py/H)*(Y1-Y0)];}
+function hexRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return[n>>16&255,n>>8&255,n&255];}
+function paintField(){
+  dpr=Math.min(2,devicePixelRatio||1); const r=cv.getBoundingClientRect(); W=r.width;H=r.height;
+  cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+  const w=cv.width,h=cv.height, img=ctx.createImageData(w,h), d=img.data;
+  const pc=hexRgb(css('--panel')), lc=hexRgb(css('--contour')), sc=hexRgb(css('--sea-soft'));
+  for(let j=0;j<h;j++){ const y=Y0+(1-j/h)*(Y1-Y0);
+    for(let i=0;i<w;i++){ const x=X0+i/w*(X1-X0); const v=f(x,y); const L=Math.log(v+0.03)*3.2;
+      const fr=Math.abs(L-Math.round(L)); const line=Math.max(0,1-fr*(dpr>1?14:10));
+      const deep=Math.max(0,Math.min(1,1-(L+11)/16));
+      const k=(j*w+i)*4;
+      for(let c=0;c<3;c++){ const base=pc[c]+(sc[c]-pc[c])*deep*0.9; d[k+c]=base+(lc[c]-base)*line; }
+      d[k+3]=255; } }
+  bg=img;
+}
+let runs=[], t=0;
+function start(x,y){ runs=OPT.map(o=>({o,x,y,m:[0,0],v:[0,0],trail:[[x,y]],done:false})); t=0; }
+function step(r){
+  const g=grad(r.x,r.y), o=r.o; t;
+  if(o.id==='SGD'){ r.x-=o.lr*g[0]; r.y-=o.lr*g[1]; }
+  else if(o.id==='Momentum'){ r.m=[0.9*r.m[0]+g[0],0.9*r.m[1]+g[1]]; r.x-=o.lr*r.m[0]; r.y-=o.lr*r.m[1]; }
+  else if(o.id==='Adam'){ const b1=.9,b2=.999,n=r.trail.length; r.m=[b1*r.m[0]+(1-b1)*g[0],b1*r.m[1]+(1-b1)*g[1]]; r.v=[b2*r.v[0]+(1-b2)*g[0]**2,b2*r.v[1]+(1-b2)*g[1]**2];
+    const mh=[r.m[0]/(1-b1**n),r.m[1]/(1-b1**n)], vh=[r.v[0]/(1-b2**n),r.v[1]/(1-b2**n)]; r.x-=o.lr*mh[0]/(Math.sqrt(vh[0])+1e-8); r.y-=o.lr*mh[1]/(Math.sqrt(vh[1])+1e-8); }
+  else { const b1=.9,b2=.99; const u=[Math.sign(b1*r.m[0]+(1-b1)*g[0]),Math.sign(b1*r.m[1]+(1-b1)*g[1])]; r.x-=o.lr*u[0]; r.y-=o.lr*u[1]; r.m=[b2*r.m[0]+(1-b2)*g[0],b2*r.m[1]+(1-b2)*g[1]]; }
+  r.x=Math.max(X0,Math.min(X1,r.x)); r.y=Math.max(Y0,Math.min(Y1,r.y));
+  r.trail.push([r.x,r.y]); if(r.trail.length>420) r.done=true;
+}
+const ro=document.getElementById('readout');
+function draw(){
+  ctx.setTransform(1,0,0,1,0,0); ctx.putImageData(bg,0,0); ctx.setTransform(dpr,0,0,dpr,0,0);
+  const [mx,my]=toPx(0,0); ctx.strokeStyle=css('--ink-2'); ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(mx-6,my);ctx.lineTo(mx+6,my);ctx.moveTo(mx,my-6);ctx.lineTo(mx,my+6);ctx.stroke();
+  let html='<div class="h"><span>optimizer</span><span>loss</span></div>';
+  runs.forEach(r=>{ if(!r.o.on) return; const col=css(r.o.c);
+    ctx.strokeStyle=col; ctx.lineWidth=2; ctx.lineJoin='round'; ctx.beginPath();
+    r.trail.forEach((p,i)=>{const q=toPx(p[0],p[1]); i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}); ctx.stroke();
+    const q=toPx(r.x,r.y); ctx.fillStyle=col; ctx.beginPath(); ctx.arc(q[0],q[1],5,0,7); ctx.fill();
+    ctx.strokeStyle=css('--panel'); ctx.lineWidth=2; ctx.stroke();
+    html+=`<div><span style="color:${col}">● ${r.o.id}</span><span>${f(r.x,r.y).toFixed(4)}</span></div>`; });
+  const [sx,sy]=toPx(runs[0].trail[0][0],runs[0].trail[0][1]); ctx.fillStyle=css('--ink'); ctx.font='500 11px "JetBrains Mono", monospace'; ctx.fillText('start',sx+8,sy-8);
+  html+=`<div class="h" style="margin-top:4px"><span>step</span><span>${runs[0].trail.length-1}</span></div>`;
+  ro.innerHTML=html;
+}
+const starts=[[-5.2,2.6],[5.3,-2.5],[-4.6,-2.6],[4.8,2.7],[-1.2,2.9]]; let si=0;
+function loop(){
+  for(let s=0;s<2;s++) runs.forEach(r=>{ if(!r.done) step(r); });
+  draw();
+  if(runs.every(r=>r.done)){ if(++t>90){ si=(si+1)%starts.length; start(...starts[si]); } }
+  requestAnimationFrame(loop);
+}
+paintField(); start(...starts[0]);
+if(reduce){ for(let i=0;i<420;i++) runs.forEach(r=>{ if(!r.done) step(r); }); draw(); } else requestAnimationFrame(loop);
+cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect(); start(...toW(e.clientX-r.left,e.clientY-r.top)); if(reduce){for(let i=0;i<420;i++) runs.forEach(r=>{ if(!r.done) step(r); }); draw();}});
+let rt; addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{paintField(); if(reduce) draw();},150);});
+const rethink=()=>{paintField(); if(reduce) draw(); wpaint&&wpaint();};
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',rethink);
+new MutationObserver(rethink).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+/* ============ WOUND SEGMENTATION ILLUSTRATION ============ */
+const wc=document.getElementById('wound'), wx=wc.getContext('2d'); let wpaint;
+(function(){
+  let WW,WH,dp; function size(){dp=Math.min(2,devicePixelRatio||1);const r=wc.getBoundingClientRect();WW=r.width;WH=r.height;wc.width=WW*dp;wc.height=WH*dp;wx.setTransform(dp,0,0,dp,0,0);}
+  const blob=(cx,cy,R,seed,t,amp)=>{const pts=[];for(let i=0;i<=64;i++){const a=i/64*Math.PI*2;const n=Math.sin(a*3+seed)*.12+Math.sin(a*5+seed*2+t*.6)*.06*amp+Math.sin(a*2-seed)*.08;pts.push([cx+Math.cos(a)*R*(1+n),cy+Math.sin(a)*R*(1+n)*.78]);}return pts;};
+  const path=p=>{wx.beginPath();p.forEach((q,i)=>i?wx.lineTo(q[0],q[1]):wx.moveTo(q[0],q[1]));wx.closePath();};
+  function frame(ts){
+    const t=ts/1000; wx.clearRect(0,0,WW,WH);
+    const cx=WW*.5,cy=WH*.52,R=Math.min(WW,WH)*.26;
+    // grid
+    wx.strokeStyle=css('--contour'); wx.lineWidth=1; wx.globalAlpha=.6;
+    for(let x=0;x<WW;x+=24){wx.beginPath();wx.moveTo(x,0);wx.lineTo(x,WH);wx.stroke();}
+    for(let y=0;y<WH;y+=24){wx.beginPath();wx.moveTo(0,y);wx.lineTo(WW,y);wx.stroke();}
+    wx.globalAlpha=1;
+    const amp=reduce?0:1;
+    const outer=blob(cx,cy,R,1.3,t,amp), mid=blob(cx+R*.08,cy,R*.62,2.1,t*1.2,amp), core=blob(cx-R*.1,cy+R*.05,R*.3,3.7,t*1.4,amp);
+    const prog=reduce?1:(Math.sin(t*.7)*.5+.5);
+    wx.globalAlpha=.85; wx.fillStyle=css('--rose'); path(outer); wx.fill();
+    wx.fillStyle=css('--sand'); path(mid); wx.fill();
+    wx.fillStyle=css('--olive'); path(core); wx.fill(); wx.globalAlpha=1;
+    // sweeping segmentation edge
+    wx.save(); wx.beginPath(); wx.rect(0,0,WW*(.15+prog*.85),WH); wx.clip();
+    wx.strokeStyle=css('--ink'); wx.lineWidth=2; wx.setLineDash([6,5]); wx.lineDashOffset=-t*20; path(outer); wx.stroke(); wx.restore();
+    wx.setLineDash([]);
+    // scan line
+    const sx=WW*(.15+prog*.85); wx.strokeStyle=css('--sea'); wx.lineWidth=2; wx.beginPath(); wx.moveTo(sx,0); wx.lineTo(sx,WH); wx.stroke();
+    // calibration ruler
+    const rx=WW*.1, ry=WH*.88, rl=Math.min(120,WW*.3);
+    wx.strokeStyle=css('--ink'); wx.lineWidth=2; wx.beginPath(); wx.moveTo(rx,ry); wx.lineTo(rx+rl,ry); wx.stroke();
+    for(let i=0;i<=10;i++){wx.beginPath();wx.moveTo(rx+rl*i/10,ry);wx.lineTo(rx+rl*i/10,ry-(i%5?5:10));wx.stroke();}
+    wx.fillStyle=css('--ink'); wx.font='500 11px "JetBrains Mono", monospace'; wx.fillText('calibration · 10 mm',rx,ry+16);
+    // labels
+    const lab=(txt,col,x,y)=>{wx.font='500 11px "JetBrains Mono", monospace';const w=wx.measureText(txt).width+12;wx.fillStyle=css('--panel');wx.fillRect(x,y-14,w,20);wx.fillStyle=col;wx.fillRect(x,y-14,3,20);wx.fillStyle=css('--ink');wx.fillText(txt,x+7,y);};
+    lab('granulation',css('--rose'),WW*.06,WH*.14);
+    lab('slough',css('--sand'),WW*.06,WH*.14+26);
+    lab('necrotic',css('--olive'),WW*.06,WH*.14+52);
+    lab('area ≈ '+(4.2+Math.sin(t*.7)*.06).toFixed(2)+' cm²',css('--sea'),WW*.62,WH*.14);
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  wpaint=()=>{size(); if(reduce) frame(0);};
+  size(); requestAnimationFrame(frame);
+  addEventListener('resize',()=>size());
+})();
+
+/* ============ CONTACT ORBIT ============ */
+const oc=document.getElementById('orbit'), ox=oc.getContext('2d');
+(function(){ const S=360, dp=Math.min(2,devicePixelRatio||1); oc.width=S*dp; oc.height=S*dp; ox.scale(dp,dp);
+  const pts=Array.from({length:70},(_,i)=>({r:40+Math.random()*140,a:Math.random()*7,s:(.002+Math.random()*.006)*(i%2?1:-1)}));
+  function fr(){ ox.clearRect(0,0,S,S); const col=css('--deep-accent');
+    pts.forEach(p=>{ if(!reduce) p.a+=p.s; const x=S/2+Math.cos(p.a)*p.r, y=S/2+Math.sin(p.a)*p.r*.6; ox.fillStyle=col; ox.globalAlpha=.6; ox.beginPath(); ox.arc(x,y,1.6,0,7); ox.fill(); });
+    ox.globalAlpha=.25; ox.strokeStyle=col; [70,120,170].forEach(r=>{ox.beginPath();ox.ellipse(S/2,S/2,r,r*.6,0,0,7);ox.stroke();}); ox.globalAlpha=1;
+    if(!reduce) requestAnimationFrame(fr); }
+  fr(); })();
+})();
+</script>
+
+</body>
+</html>
