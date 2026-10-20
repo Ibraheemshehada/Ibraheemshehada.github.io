@@ -83,6 +83,17 @@ p{margin:0}
 .progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--sea);transform-origin:0 50%;transform:scaleX(0)}
 @media (max-width:720px){.nav a:not(.keep){display:none}}
 
+.top-r{display:flex;align-items:center;gap:8px}
+.theme-btn{all:unset;cursor:pointer;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--panel);color:var(--ink);transition:background .2s,border-color .2s,transform .4s cubic-bezier(.2,.8,.2,1);flex:none}
+.theme-btn:hover{border-color:var(--sea);transform:rotate(-20deg)}
+.theme-btn:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.theme-btn svg{width:18px;height:18px}
+@media (max-width:440px){.mark span{display:none}}
+.theme-btn .moon{display:none}
+:root[data-theme="dark"] .theme-btn .sun{display:none}
+:root[data-theme="dark"] .theme-btn .moon{display:block}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme-btn .sun{display:none}:root:not([data-theme="light"]) .theme-btn .moon{display:block}}
+
 /* ---------- hero ---------- */
 .hero{padding-block:clamp(40px,7vw,88px) 40px}
 .hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
@@ -310,9 +321,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <body>
 
 
+<script>try{var _t=localStorage.getItem('theme');if(_t==='dark'||_t==='light')document.documentElement.setAttribute('data-theme',_t)}catch(e){}</script>
 <header class="top">
   <div class="wrap">
     <a class="mark" href="#top"><i>IKS</i><span>Ibrahim Shehada</span></a>
+    <div class="top-r">
     <nav class="nav" aria-label="Sections">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
@@ -321,6 +334,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a href="#skills">Skills</a>
       <a href="#contact" class="keep">Contact</a>
     </nav>
+    <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch to dark mode" title="Switch theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6z"/></svg>
+    </button>
+    </div>
   </div>
   <div class="progress" id="progress"></div>
 </header>
@@ -625,6 +643,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 (()=>{
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* theme toggle */
+const tb=document.getElementById('themeBtn'), root=document.documentElement;
+const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+const syncBtn=()=>tb.setAttribute('aria-label',isDark()?'Switch to light mode':'Switch to dark mode');
+syncBtn();
+tb.addEventListener('click',()=>{const next=isDark()?'light':'dark';root.setAttribute('data-theme',next);try{localStorage.setItem('theme',next)}catch(e){}syncBtn();});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',syncBtn);
 
 /* scroll progress + active nav */
 const prog=document.getElementById('progress');
